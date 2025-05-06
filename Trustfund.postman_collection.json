@@ -1,0 +1,832 @@
+{
+	"info": {
+		"_postman_id": "1712aee3-e835-4e15-952f-dc8d17d7c297",
+		"name": "Trustfund",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759",
+		"_collection_link": "https://www.postman.com/speeding-meadow-915256/workspace/trustfund-pension/collection/10333949-1712aee3-e835-4e15-952f-dc8d17d7c297?action=share&source=collection_link&creator=23236759"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}pensionserver-web/rest/partnerservice/auth/login",
+							"host": [
+								"{{base_url}}pensionserver-web"
+							],
+							"path": [
+								"rest",
+								"partnerservice",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer {{vault:json-web-token}}"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 07:41:11 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "get summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pin\": \"PEN100048037525\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}pensionserver-web/rest/partnerservice/getsummary",
+							"host": [
+								"{{base_url}}pensionserver-web"
+							],
+							"path": [
+								"rest",
+								"partnerservice",
+								"getsummary"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1272"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 06 Mar 2025 13:51:27 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"totalContributionMandatory\": 324039.38,\n    \"totalFeesMandatory\": 4800,\n    \"totalUnitMandatory\": 51395.37,\n    \"netContributionMandatory\": -594478.24,\n    \"totalContributionVoluntary\": 0,\n    \"totalFeesVoluntary\": 0,\n    \"totalUnitVoluntary\": 0,\n    \"netContributionVoluntary\": 0,\n    \"totalWithdrawalMandatory\": 0,\n    \"totalWithdrawalVoluntary\": -913717.62,\n    \"totalWithdrwal\": -913717.62,\n    \"totalBalance\": 324039.38,\n    \"balanceBF\": null,\n    \"balanceCL\": null,\n    \"unitPrice\": 5.7533,\n    \"balanceMandatory\": 295692.982221,\n    \"growthMandatory\": 890171.222221,\n    \"balanceVoluntary\": 0,\n    \"growthVoluntary\": 0,\n    \"schemeName\": \"TRUSTFUND RSA FUND 4\",\n    \"fundId\": 7,\n    \"bioData\": {\n        \"pin\": \"PEN100048037525\",\n        \"firstname\": \"IBRAHIM\",\n        \"surname\": \"SULEIMAN\",\n        \"othernames\": \"\",\n        \"email\": \"IBRAHIMSULAIMAN58@GMAIL.COM\",\n        \"mobilePhone\": \"08030696825\",\n        \"title\": \"Mr\",\n        \"gender\": \"M\",\n        \"dateOfBirth\": 98838000000,\n        \"permanentAddress\": \"NO 1 AKALAWA, AA\",\n        \"employerName\": \"SOKOTO CEMENT SCHOOLS\",\n        \"nokMobilePhone\": \"7036436583\",\n        \"nokAddress\": \"N0 25, AA\",\n        \"nokSurname\": \"LAWAL\",\n        \"nokOthername\": \"SHEHU\",\n        \"nokRelationship\": \"WIFE\",\n        \"nokName\": \"JAMILA\",\n        \"nokEmailaddress\": \"\",\n        \"nok2Firstname\": \"\",\n        \"nok2Surname\": \"\",\n        \"nok2Othername\": \"\",\n        \"nok2Relationship\": \"\",\n        \"nok2Mobilephone\": \"\",\n        \"nok2Emailaddress\": \"\",\n        \"nok2Address\": \"\",\n        \"fundId\": null,\n        \"fundName\": null\n    },\n    \"contributions\": null,\n    \"priceList\": null,\n    \"price\": 5.7533\n}"
+				}
+			]
+		},
+		{
+			"name": "Customer OnBoarding",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate statement of account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pin\": \"PEN100482240920\",\n    \"toDate\": \"2024-04-31\",\n    \"fromDate\": \"2022-02-01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}pensionserver-web/rest/partnerservice/generate/report-pin",
+					"host": [
+						"{{base_url}}pensionserver-web"
+					],
+					"path": [
+						"rest",
+						"partnerservice",
+						"generate",
+						"report-pin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pin\": \"PEN100048037525\",\n    \"toDate\": \"2024-04-31\",\n    \"fromDate\": \"2022-02-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}pensionserver-web/rest/partnerservice/generate/report-pin",
+							"host": [
+								"{{base_url}}pensionserver-web"
+							],
+							"path": [
+								"rest",
+								"partnerservice",
+								"generate",
+								"report-pin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Disposition",
+							"value": "attachment; filename=PEN100048037525.pdf"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 07:44:42 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Generate Certificate of Registration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:authorization-secret}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pin\": \"PEN210063424591\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}pensionserver-web/rest/partnerservice/generate/welcome-letter",
+					"host": [
+						"{{base_url}}pensionserver-web"
+					],
+					"path": [
+						"rest",
+						"partnerservice",
+						"generate",
+						"welcome-letter"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pin\": \"PEN210063424591\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}pensionserver-web/rest/partnerservice/generate/welcome-letter",
+							"host": [
+								"{{base_url}}pensionserver-web"
+							],
+							"path": [
+								"rest",
+								"partnerservice",
+								"generate",
+								"welcome-letter"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Disposition",
+							"value": "attachment; filename=PEN210063424591.pdf"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 07:42:23 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Email Notification",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"okeoghene.philip5@gmail.com\",\n  \"subject\": \"Test From Valentine Hundu\",\n  \"body\": \"This is a test email sent using PHPMailer!\",\n  \"from\": \"Tiva@Trustfundpensions.com\",\n  \"from_name\": \"Trustfund\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://217.14.92.87/mobile/sendemail.php",
+							"protocol": "http",
+							"host": [
+								"217",
+								"14",
+								"92",
+								"87"
+							],
+							"path": [
+								"mobile",
+								"sendemail.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 07:18:02 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.46 (Win64) OpenSSL/1.1.1g PHP/7.4.10"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.10"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Content-Length",
+							"value": "57"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Email sent successfully.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "SMS Notification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"trustfundpensio\",\n    \"password\": \"Odo35IzK\",\n    \"msisdn\": \"+2348065171052\",\n    \"msg\": \"Hello Hundu\",\n    \"sender\": \"Trustfund\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://217.14.92.87/mobile/sendsms.php",
+					"protocol": "http",
+					"host": [
+						"217",
+						"14",
+						"92",
+						"87"
+					],
+					"path": [
+						"mobile",
+						"sendsms.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"trustfundpensio\",\n    \"password\": \"Odo35IzK\",\n    \"msisdn\": \"+2348065171052\",\n    \"msg\": \"Hello Hundu\",\n    \"sender\": \"Trustfund\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://217.14.92.87/mobile/sendsms.php",
+							"protocol": "http",
+							"host": [
+								"217",
+								"14",
+								"92",
+								"87"
+							],
+							"path": [
+								"mobile",
+								"sendsms.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 07:20:28 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.46 (Win64) OpenSSL/1.1.1g PHP/7.4.10"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.10"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type"
+						},
+						{
+							"key": "Content-Length",
+							"value": "167"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"response\": {\n        \"results\": [\n            {\n                \"msisdn\": \"+2348065171052\",\n                \"smscount\": \"1\",\n                \"code\": \"0\",\n                \"reason\": \"ACCEPTED\",\n                \"ticket\": \"6dd34ec1-03c9-11f0-80e8-00000a148c01\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Account Manager",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"rsa_number\": \"PEN100048037525\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://217.14.92.87/api/get_agent.php",
+					"protocol": "http",
+					"host": [
+						"217",
+						"14",
+						"92",
+						"87"
+					],
+					"path": [
+						"api",
+						"get_agent.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rsa_number\": \"PEN100048037525\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://217.14.92.87/api/get_agent.php",
+							"protocol": "http",
+							"host": [
+								"217",
+								"14",
+								"92",
+								"87"
+							],
+							"path": [
+								"api",
+								"get_agent.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 07:00:43 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.46 (Win64) OpenSSL/1.1.1g PHP/7.4.10"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.10"
+						},
+						{
+							"key": "Content-Length",
+							"value": "88"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"AGENT_NAME\": \"ETU SUNDAY SULEIMAN\",\n        \"AGENT_PHONE\": null\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Last 10 Contributions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"pin\": \"PEN100048037525\"\n \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://217.14.92.87/api/get_contributions.php",
+					"protocol": "http",
+					"host": [
+						"217",
+						"14",
+						"92",
+						"87"
+					],
+					"path": [
+						"api",
+						"get_contributions.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"pin\": \"PEN100048037525\"\n \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://217.14.92.87/api/get_contributions.php",
+							"protocol": "http",
+							"host": [
+								"217",
+								"14",
+								"92",
+								"87"
+							],
+							"path": [
+								"api",
+								"get_contributions.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 06:59:56 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.46 (Win64) OpenSSL/1.1.1g PHP/7.4.10"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.10"
+						},
+						{
+							"key": "Content-Length",
+							"value": "162"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Date\": \"Feb-2021\",\n        \"EMPLOYEE_CONTRIBUTION\": \"184.09\",\n        \"EMPLOYER_CONTRIBUTION\": \".00\",\n        \"OTHER_CONTRIBUTION\": \".00\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Fund types",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://217.14.92.87/api/get_schemes.php",
+					"protocol": "http",
+					"host": [
+						"217",
+						"14",
+						"92",
+						"87"
+					],
+					"path": [
+						"api",
+						"get_schemes.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://217.14.92.87/api/get_schemes.php",
+							"protocol": "http",
+							"host": [
+								"217",
+								"14",
+								"92",
+								"87"
+							],
+							"path": [
+								"api",
+								"get_schemes.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 18 Mar 2025 06:59:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.46 (Win64) OpenSSL/1.1.1g PHP/7.4.10"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.10"
+						},
+						{
+							"key": "Content-Length",
+							"value": "609"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=99"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"scheme_ID\": \"1\",\n        \"scheme_name\": \"TRUSTFUND RSA FUND 2\"\n    },\n    {\n        \"scheme_ID\": \"7\",\n        \"scheme_name\": \"TRUSTFUND RSA FUND 4\"\n    },\n    {\n        \"scheme_ID\": \"54\",\n        \"scheme_name\": \"TRUSTFUND RSA FUND 1\"\n    },\n    {\n        \"scheme_ID\": \"55\",\n        \"scheme_name\": \"TRUSTFUND RSA FUND 3\"\n    },\n    {\n        \"scheme_ID\": \"62\",\n        \"scheme_name\": \"MICRO PENSION SCHEME FUND\"\n    },\n    {\n        \"scheme_ID\": \"68\",\n        \"scheme_name\": \"NON INTEREST FUND\"\n    },\n    {\n        \"scheme_ID\": \"69\",\n        \"scheme_name\": \"NON INTEREST FUND RETIREE\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{vault:authorization-password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "Ffapi",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://217.14.92.82:8080/"
+		}
+	]
+}
