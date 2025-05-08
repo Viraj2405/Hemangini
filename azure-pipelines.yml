@@ -6,12 +6,12 @@ trigger:
 variables:
   REPO_URL: 'https://github.com/Viraj2405/Hemangini'
   BRANCH: 'main'
-  FILE_NAME: 'Hostinger API.postman_collection.json'
+  FILE_NAME: 'Haircut Store API.postman_collection 39.json'
 
   SECURITY_SCAN_API: 'https://0b8e-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
   UPLOAD_API_URL: 'https://0b8e-45-252-74-134.ngrok-free.app/v1/webHook'
-  APPKEYTOKEN: '7ef90415-5051-496f-ac87-54c64a7102ec'
-  PROJECT_ID: '21e6e0a5-e1f4-4f59-bc6a-86efb866b517'
+  APPKEYTOKEN: 'a31a2928-8e1c-460c-99e6-e8cde22a9d7f'
+  PROJECT_ID: 'c34224eb-96db-4d0f-a08e-303eb36609b3'
 
   BLOCK_PIPELINE: 'true'
   BLOCK_CRITICAL: 'false'
