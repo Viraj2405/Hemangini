@@ -1,0 +1,110 @@
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  REPO_URL: 'https://github.com/Viraj2405/Hemangini'
+  BRANCH: 'main'
+  FILE_NAME: 'Hostinger API.postman_collection.json'
+
+  SECURITY_SCAN_API: 'https://0b8e-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
+  UPLOAD_API_URL: 'https://0b8e-45-252-74-134.ngrok-free.app/v1/webHook'
+  APPKEYTOKEN: '7ef90415-5051-496f-ac87-54c64a7102ec'
+  PROJECT_ID: '21e6e0a5-e1f4-4f59-bc6a-86efb866b517'
+
+  BLOCK_PIPELINE: 'true'
+  BLOCK_CRITICAL: 'false'
+  BLOCK_HIGH: 'false'
+  BLOCK_MEDIUM: 'false'
+
+  CRITICAL_THRESHOLD: '0'
+  HIGH_THRESHOLD: '0'
+  MEDIUM_THRESHOLD: '0'
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  - task: PowerShell@2
+    displayName: 'Clone and Upload File'
+    inputs:
+      targetType: 'inline'
+      script: |
+        git clone --branch $(BRANCH) --depth 1 $(REPO_URL) temp-repo
+
+        $file = Get-ChildItem -Path temp-repo -Recurse -File -Filter "$(FILE_NAME)" | Select-Object -First 1
+
+        if ($file) {
+          Write-Host "Found file: $($file.FullName)"
+          Copy-Item -Path $file.FullName -Destination "$(FILE_NAME)"
+          curl.exe --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
+        } else {
+          throw "File '$(FILE_NAME)' not found in repository."
+        }
+
+  - task: PowerShell@2
+    displayName: 'Run Security Scan'
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host "Starting Security Scan..."
+
+        $apiUrl = "$(SECURITY_SCAN_API)/$(PROJECT_ID)"
+        $headers = @(
+          "--header", "Content-Type: application/json",
+          "--header", "Api-Key: $(APPKEYTOKEN)"
+        )
+
+        $args = @(
+          "--location",
+          "--request", "POST",
+          $apiUrl
+        ) + $headers
+
+        $response = & curl.exe @args
+
+        Write-Host "Scan Response: $response"
+
+        if ($response -match '"message"\s*:\s*"token expired"') {
+          throw "Token expired. Blocking pipeline."
+        }
+
+        function Extract-Count {
+          param ($name)
+          if ($response -match '"' + $name + '"\s*:\s*(\d+)') {
+            return [int]$Matches[1]
+          }
+          return 0
+        }
+
+        $critical = Extract-Count 'criticalCount'
+        $high     = Extract-Count 'highCount'
+        $medium   = Extract-Count 'mediumCount'
+
+        Write-Host "Severity Summary:"
+        Write-Host "Critical: $critical"
+        Write-Host "High: $high"
+        Write-Host "Medium: $medium"
+
+        $criticalThreshold = [int]"$(CRITICAL_THRESHOLD)"
+        $highThreshold     = [int]"$(HIGH_THRESHOLD)"
+        $mediumThreshold   = [int]"$(MEDIUM_THRESHOLD)"
+
+        if ("$(BLOCK_PIPELINE)" -eq 'true') {
+          if ("$(BLOCK_CRITICAL)" -eq 'true' -and $critical -ge $criticalThreshold) {
+            throw "Blocked: Critical count ($critical) >= Threshold ($criticalThreshold)"
+          }
+          if ("$(BLOCK_HIGH)" -eq 'true' -and $high -ge $highThreshold) {
+            throw "Blocked: High count ($high) >= Threshold ($highThreshold)"
+          }
+          if ("$(BLOCK_MEDIUM)" -eq 'true' -and $medium -ge $mediumThreshold) {
+            throw "Blocked: Medium count ($medium) >= Threshold ($mediumThreshold)"
+          }
+          Write-Host "No blocking severity found. Continuing pipeline."
+        } else {
+          Write-Host "BLOCK_PIPELINE is false — skipping severity checks."
+        }
+
+  - script: echo "Post-processing complete."
+    displayName: 'Post-processing'
