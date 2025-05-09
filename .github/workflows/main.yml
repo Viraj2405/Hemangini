@@ -1,0 +1,105 @@
+pipeline {
+    agent any
+    environment {
+        REPO_URL       = 'https://github.com/Viraj2405/Hemangini'
+        BRANCH     = 'main'
+        FILE_NAME      = 'Haircut Store API.postman_collection 39.json'
+        TEMP_DIR       = 'temp-repo'
+        SECURITY_SCAN_API = 'http://103.81.38.252:9090/v1/startSecurityScan'
+        PROJECT_ID     = '455076df-5360-4aa0-97a8-674262f05f5f'
+        BLOCK_PIPELINE = 'true'
+        BLOCK_CRITICAL = 'true'
+        BLOCK_HIGH     = 'true'
+        BLOCK_MEDIUM   = 'true'
+        CRITICAL_THRESHOLD = '1'
+        HIGH_THRESHOLD     = '1'
+        MEDIUM_THRESHOLD   = '1'
+        INTEGRATION_ID = 'e255906c-c835-486b-9bc1-b93c81cc2114'
+        UPLOAD_API_URL = 'http://103.81.38.252:9090/v1/webHook'
+    }
+
+    stages {
+        stage('Clone & Upload File') {
+            steps {
+                script {
+                    bat """
+					git clone --branch %BRANCH% --depth 1 %REPO_URL% %TEMP_DIR%
+					for /f "delims=" %%F in ('dir /s /b "%TEMP_DIR%\\%FILE_NAME%"') do (
+						echo Found: %%F
+						copy "%%F" "%WORKSPACE%\\%FILE_NAME%"
+					)
+					rmdir /s /q %TEMP_DIR%
+					"""
+
+                    if (!fileExists("${env.FILE_NAME}")) {
+                        error "File '${env.FILE_NAME}' not found after clone."
+                    }
+
+                    bat """
+                    curl --location "%UPLOAD_API_URL%" ^
+                    --form "file=@%FILE_NAME%" ^
+                    --form "project_id=%PROJECT_ID%"
+                    """
+                }
+            }
+        }
+
+        stage('Run Security Scan') {
+            steps {
+                script {
+                    def response = bat(
+                        script: """
+                        curl --silent --request POST "%SECURITY_SCAN_API%/%PROJECT_ID%" ^
+                        --header "Api-Key: %INTEGRATION_ID%"
+                        """,
+                        returnStdout: true
+                    ).trim()
+
+                    echo "Scan Response: ${response}"
+
+                    if (response.contains('"message":"token expired"')) {
+                        error "Token expired. Aborting pipeline."
+                    }
+
+                    def extractInt = { key ->
+                        def match = (response =~ /"${key}"\\s*:\\s*(\\d+)/)
+                        return match ? match[0][1].toInteger() : 0
+                    }
+
+                    def critical = extractInt('criticalCount')
+                    def high     = extractInt('highCount')
+                    def medium   = extractInt('mediumCount')
+
+                    echo "Critical: ${critical}, High: ${high}, Medium: ${medium}"
+
+                    if (env.BLOCK_PIPELINE == 'true') {
+                        if (env.BLOCK_CRITICAL == 'true' && critical >= env.CRITICAL_THRESHOLD.toInteger()) {
+                            error "Blocked: Critical findings exceed threshold."
+                        }
+                        if (env.BLOCK_HIGH == 'true' && high >= env.HIGH_THRESHOLD.toInteger()) {
+                            error "Blocked: High findings exceed threshold."
+                        }
+                        if (env.BLOCK_MEDIUM == 'true' && medium >= env.MEDIUM_THRESHOLD.toInteger()) {
+                            error "Blocked: Medium findings exceed threshold."
+                        }
+                        echo "No blocking issues. Continuing pipeline."
+                    } else {
+                        echo "Blocking is disabled."
+                    }
+                }
+            }
+        }
+
+        stage('Post-processing') {
+            steps {
+                echo "Post-processing complete."
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
