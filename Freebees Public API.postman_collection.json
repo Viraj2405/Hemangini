@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "d3196242-a43d-4e0c-937d-dea82024a76c",
+		"name": "Freebees Public API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759",
+		"_collection_link": "https://www.postman.com/trustyourgod/freebees-public-api/collection/ev9m2pd/freebees-public-api?action=share&source=collection_link&creator=23236759"
+	},
+	"item": [
+		{
+			"name": "Product Review",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "key",
+							"value": "key",
+							"type": "text"
+						},
+						{
+							"key": "product_slug",
+							"value": "product slug in freebees web",
+							"type": "text"
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://freebees.id/api/client/product/review-product",
+					"protocol": "https",
+					"host": [
+						"freebees",
+						"id"
+					],
+					"path": [
+						"api",
+						"client",
+						"product",
+						"review-product"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
