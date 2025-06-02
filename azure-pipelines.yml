@@ -4,23 +4,23 @@ trigger:
       - main
 
 variables:
-  REPO_URL: 'https://github.com/Viraj2405/Hemangini'
+  REPO_URL: 'https://github.com/Viraj2405/Marathe'
   BRANCH: 'main'
-  FILE_NAME: 'Freebees Public API.postman_collection.json'
+  FILE_NAME: 'Webhooks API Collections.postman_collection.json'
 
-  SECURITY_SCAN_API: 'https://1224-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
-  UPLOAD_API_URL: 'https://1224-45-252-74-134.ngrok-free.app/v1/webHook'
-  APPKEYTOKEN: 'f87cccfa-1bb5-4aca-85d4-3d0489bc6e60'
-  PROJECT_ID: '40282439-5a5f-4e46-8972-0bb247b8853a'
+  SECURITY_SCAN_API: 'https://b271-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
+  UPLOAD_API_URL: 'https://b271-45-252-74-134.ngrok-free.app/v1/webHook'
+  APPKEYTOKEN: 'ed058a8a-a9b2-43f0-aa08-9c8d4d324974'
+  PROJECT_ID: 'e746784e-985c-48b3-89b0-bea9f52d8dcf'
 
   BLOCK_PIPELINE: 'true'
   BLOCK_CRITICAL: 'true'
   BLOCK_HIGH: 'true'
   BLOCK_MEDIUM: 'true'
 
-  CRITICAL_THRESHOLD: '1'
-  HIGH_THRESHOLD: '1'
-  MEDIUM_THRESHOLD: '1'
+  CRITICAL_THRESHOLD: '0'
+  HIGH_THRESHOLD: '0'
+  MEDIUM_THRESHOLD: '0'
 
 pool:
   vmImage: 'windows-latest'
