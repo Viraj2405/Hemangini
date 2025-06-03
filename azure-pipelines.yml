@@ -13,7 +13,7 @@ variables:
   value: 'main'
 
 - name: FILE_NAME
-  value: 'OneProvider Public Collection.postman_collection.json'
+  value: 'Data Visualization.postman_collection.json'
 
 - name: SECURITY_SCAN_API
   value: 'https://7e6e-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
@@ -22,10 +22,10 @@ variables:
   value: 'https://7e6e-45-252-74-134.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: 'eb07c5ac-f9c2-4737-b999-34c62d619fdf'
+  value: '5f9032b1-9872-4a2e-921b-576d06e0a28e'
 
 - name: PROJECT_ID
-  value: '86570f5f-1283-4c95-9ee3-6873c99503bc'
+  value: 'a48c1d46-ee92-4c45-924b-0066c1012536'
 
 - name: BLOCK_PIPELINE
   value: 'false'
