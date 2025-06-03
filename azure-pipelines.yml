@@ -4,23 +4,50 @@ trigger:
       - main
 
 variables:
-  REPO_URL: 'https://github.com/Viraj2405/Marathe'
-  BRANCH: 'main'
-  FILE_NAME: 'Webhooks API Collections.postman_collection.json'
+- group: "BugDazz"
 
-  SECURITY_SCAN_API: 'https://b271-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
-  UPLOAD_API_URL: 'https://b271-45-252-74-134.ngrok-free.app/v1/webHook'
-  APPKEYTOKEN: 'ed058a8a-a9b2-43f0-aa08-9c8d4d324974'
-  PROJECT_ID: 'e746784e-985c-48b3-89b0-bea9f52d8dcf'
+- name: REPO_URL
+  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Marathe"
 
-  BLOCK_PIPELINE: 'true'
-  BLOCK_CRITICAL: 'true'
-  BLOCK_HIGH: 'true'
-  BLOCK_MEDIUM: 'true'
+- name: BRANCH
+  value: 'main'
 
-  CRITICAL_THRESHOLD: '0'
-  HIGH_THRESHOLD: '0'
-  MEDIUM_THRESHOLD: '0'
+- name: FILE_NAME
+  value: 'OneProvider Public Collection.postman_collection.json'
+
+- name: SECURITY_SCAN_API
+  value: 'https://7e6e-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
+
+- name: UPLOAD_API_URL
+  value: 'https://7e6e-45-252-74-134.ngrok-free.app/v1/webHook'
+
+- name: APPKEYTOKEN
+  value: 'eb07c5ac-f9c2-4737-b999-34c62d619fdf'
+
+- name: PROJECT_ID
+  value: '86570f5f-1283-4c95-9ee3-6873c99503bc'
+
+- name: BLOCK_PIPELINE
+  value: 'false'
+
+- name: BLOCK_CRITICAL
+  value: 'true'
+
+- name: BLOCK_HIGH
+  value: 'true'
+
+- name: BLOCK_MEDIUM
+  value: 'true'
+
+- name: CRITICAL_THRESHOLD
+  value: '0'
+
+- name: HIGH_THRESHOLD
+  value: '0'
+
+- name: MEDIUM_THRESHOLD
+  value: '0'
+
 
 pool:
   vmImage: 'windows-latest'
@@ -92,18 +119,18 @@ steps:
         $mediumThreshold   = [int]"$(MEDIUM_THRESHOLD)"
 
         if ("$(BLOCK_PIPELINE)" -eq 'true') {
-          if ("$(BLOCK_CRITICAL)" -eq 'true' -and $critical -ge $criticalThreshold) {
-            throw "Blocked: Critical count ($critical) >= Threshold ($criticalThreshold)"
+          if ("$(BLOCK_CRITICAL)" -eq 'true' -and $critical -gt $criticalThreshold) {
+            throw "Blocked due to critical vulnerabilities exceeding threshold."
           }
-          if ("$(BLOCK_HIGH)" -eq 'true' -and $high -ge $highThreshold) {
-            throw "Blocked: High count ($high) >= Threshold ($highThreshold)"
+          if ("$(BLOCK_HIGH)" -eq 'true' -and $high -gt $highThreshold) {
+            throw "Blocked due to high vulnerabilities exceeding threshold."
           }
-          if ("$(BLOCK_MEDIUM)" -eq 'true' -and $medium -ge $mediumThreshold) {
-            throw "Blocked: Medium count ($medium) >= Threshold ($mediumThreshold)"
+          if ("$(BLOCK_MEDIUM)" -eq 'true' -and $medium -gt $mediumThreshold) {
+            throw "Blocked due to medium vulnerabilities exceeding threshold."
           }
-          Write-Host "No blocking severity found. Continuing pipeline."
+          Write-Host "No blocking conditions met. Continuing pipeline."
         } else {
-          Write-Host "BLOCK_PIPELINE is false — skipping severity checks."
+          Write-Host "Blocking disabled. Continuing regardless of findings."
         }
 
   - script: echo "Post-processing complete."
