@@ -40,13 +40,13 @@ variables:
   value: 'true'
 
 - name: CRITICAL_THRESHOLD
-  value: ''
+  value: '0'
 
 - name: HIGH_THRESHOLD
-  value: ''
+  value: '0'
 
 - name: MEDIUM_THRESHOLD
-  value: ''
+  value: '0'
 
 
 pool:
