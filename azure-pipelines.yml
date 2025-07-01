@@ -7,28 +7,28 @@ variables:
 - group: "BugDazz"
 
 - name: REPO_URL
-  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Marathe"
+  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Hemangini"
 
 - name: BRANCH
   value: 'main'
 
 - name: FILE_NAME
-  value: 'Data Visualization.postman_collection.json'
+  value: 'Shiprocket API.postman_collection.json'
 
 - name: SECURITY_SCAN_API
-  value: 'https://7e6e-45-252-74-134.ngrok-free.app/v1/startSecurityScan'
+  value: 'http://65.0.133.126:9090/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://7e6e-45-252-74-134.ngrok-free.app/v1/webHook'
+  value: 'http://65.0.133.126:9090/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: '5f9032b1-9872-4a2e-921b-576d06e0a28e'
+  value: 'd0652333-3c17-43fc-847c-a457a0fdd747'
 
 - name: PROJECT_ID
-  value: 'a48c1d46-ee92-4c45-924b-0066c1012536'
+  value: '5649f5d0-bc0b-4ef7-b423-ad4f99a2ac8d'
 
 - name: BLOCK_PIPELINE
-  value: 'false'
+  value: 'true'
 
 - name: BLOCK_CRITICAL
   value: 'true'
@@ -40,13 +40,13 @@ variables:
   value: 'true'
 
 - name: CRITICAL_THRESHOLD
-  value: '0'
+  value: ''
 
 - name: HIGH_THRESHOLD
-  value: '0'
+  value: ''
 
 - name: MEDIUM_THRESHOLD
-  value: '0'
+  value: ''
 
 
 pool:
