@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "0b4671dc-cff1-4206-ae14-18982d5deb72",
+		"name": "Auth Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759",
+		"_collection_link": "https://www.postman.com/galactic-water-37850/learningpostman/collection/ua3ytx0/auth-collection?action=share&source=collection_link&creator=23236759"
+	},
+	"item": [
+		{
+			"name": "getDataFromAPI",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/user/repos",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user",
+						"repos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
