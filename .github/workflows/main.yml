@@ -1,0 +1,95 @@
+name: Run Security Scan
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REPO_URL: "https://${{ secrets.API_SC_TOKEN }}@github.com/Viraj2405/Hemangini"
+  BRANCH: 'main'
+  FILE_NAME: 'OneProvider Public Collection.postman_collection.json'
+  TEMP_DIR: 'temp-repo'
+  SECURITY_SCAN_API: 'https://f747d6214b63.ngrok-free.app/v1/startSecurityScan'
+  PROJECT_ID: '8de9e94f-2bf9-421a-97b1-4dcce6f25635'
+  BLOCK_PIPELINE: 'false'
+  BLOCK_CRITICAL: 'true'
+  BLOCK_HIGH: 'true'
+  BLOCK_MEDIUM: 'true'
+  CRITICAL_THRESHOLD: 0
+  HIGH_THRESHOLD: 0
+  MEDIUM_THRESHOLD: 0
+  INTEGRATION_ID: '9f217991-8df5-4692-b845-1613eee1af1b'
+  UPLOAD_API_URL: 'https://f747d6214b63.ngrok-free.app/v1/webHook'
+
+jobs:
+  run-security-scan:
+    runs-on: windows-latest
+    steps:
+
+      - name: Clone Repository and Upload File
+        shell: pwsh
+        run: |
+          git clone --branch $env:BRANCH --depth 1 $env:REPO_URL $env:TEMP_DIR
+          $filePath = Get-ChildItem -Path $env:TEMP_DIR -Recurse -File -Filter $env:FILE_NAME | Select-Object -First 1
+          if ($filePath) {
+            Write-Host "Found file: $($filePath.FullName)"
+            Copy-Item -Path $filePath.FullName -Destination "$env:FILE_NAME"
+            curl.exe --location --form "file=@$env:FILE_NAME" --form "project_id=$env:PROJECT_ID" $env:UPLOAD_API_URL
+          } else {
+            throw "File '$env:FILE_NAME' not found in repository."
+          }
+
+      - name: Run Security Scan
+        shell: pwsh
+        run: |
+          Write-Host "Calling Security Scan API..."
+          $apiUrl = "$env:SECURITY_SCAN_API/$env:PROJECT_ID"
+          $response = curl.exe --silent --request POST --header "Api-Key: $env:INTEGRATION_ID" $apiUrl
+          if (-not $response) {
+            throw "No response received from API."
+          }
+
+          Write-Host "Scan Response: $response"
+
+          if ($response -match '"message"\s*:\s*"token expired"') {
+            throw "Token expired. Exiting early."
+          }
+
+          function Extract-Int {
+            param([string]$key)
+            $pattern = '"{0}"\s*:\s*(\d+)' -f $key
+            $match = [regex]::Match($response, $pattern)
+            if ($match.Success) {
+              return [int]$match.Groups[1].Value
+            } else {
+              return 0
+            }
+          }
+
+          $critical = Extract-Int "criticalCount"
+          $high     = Extract-Int "highCount"
+          $medium   = Extract-Int "mediumCount"
+
+          Write-Host "Scan Summary:"
+          Write-Host "Critical: $critical"
+          Write-Host "High: $high"
+          Write-Host "Medium: $medium"
+
+          if ($env:BLOCK_PIPELINE -eq 'true') {
+            if ($env:BLOCK_CRITICAL -eq 'true' -and $critical -gt [int]$env:CRITICAL_THRESHOLD) {
+              throw "Blocked due to critical vulnerabilities exceeding threshold."
+            }
+            if ($env:BLOCK_HIGH -eq 'true' -and $high -gt [int]$env:HIGH_THRESHOLD) {
+              throw "Blocked due to high vulnerabilities exceeding threshold."
+            }
+            if ($env:BLOCK_MEDIUM -eq 'true' -and $medium -gt [int]$env:MEDIUM_THRESHOLD) {
+              throw "Blocked due to medium vulnerabilities exceeding threshold."
+            }
+            Write-Host "No blocking conditions met. Continuing pipeline."
+          } else {
+            Write-Host "Blocking disabled. Continuing regardless of findings."
+          }
+
+      - name: Post-processing
+        run: echo "Post-processing steps completed."
