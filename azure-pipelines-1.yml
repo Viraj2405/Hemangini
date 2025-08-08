@@ -13,22 +13,22 @@ variables:
   value: 'main'
 
 - name: FILE_NAME
-  value: 'Freebees Public API.postman_collection.json'
+  value: 'OneProvider Public Collection.postman_collection.json'
 
 - name: SECURITY_SCAN_API
-  value: 'https://75b4ed4da038.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://f747d6214b63.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://75b4ed4da038.ngrok-free.app/v1/webHook'
+  value: 'https://f747d6214b63.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: '340afa11-6a11-43a0-87c9-840f48bf9f69'
+  value: '3aad03c0-6d0b-4035-b836-7d2f1cfbbf79'
 
 - name: PROJECT_ID
-  value: '5cc9d4a5-da84-4b4d-9f27-19c0e4348fcf'
+  value: '8de9e94f-2bf9-421a-97b1-4dcce6f25635'
 
 - name: BLOCK_PIPELINE
-  value: 'true'
+  value: 'false'
 
 - name: BLOCK_CRITICAL
   value: 'true'
@@ -43,7 +43,7 @@ variables:
   value: '0'
 
 - name: HIGH_THRESHOLD
-  value: '1'
+  value: '0'
 
 - name: MEDIUM_THRESHOLD
   value: '0'
