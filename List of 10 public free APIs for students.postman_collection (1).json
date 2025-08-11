@@ -1,0 +1,1536 @@
+{
+	"info": {
+		"_postman_id": "9a3843af-c564-492c-888c-7b57f7985b39",
+		"name": "List of 10 public free APIs for students",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759",
+		"_collection_link": "https://www.postman.com/postman/more-visualizer-examples/collection/8pplfoj/list-of-10-public-free-apis-for-students?action=share&source=collection_link&creator=23236759"
+	},
+	"item": [
+		{
+			"name": "1. The Data USA API",
+			"item": [
+				{
+					"name": "Recent Population data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://datausa.io/api/data?drilldowns=Nation&measures=Population",
+							"protocol": "https",
+							"host": [
+								"datausa",
+								"io"
+							],
+							"path": [
+								"api",
+								"data"
+							],
+							"query": [
+								{
+									"key": "drilldowns",
+									"value": "Nation"
+								},
+								{
+									"key": "measures",
+									"value": "Population"
+								}
+							]
+						},
+						"description": "This API request gets population data at the national level in recent years.\n\nLink: [https://datausa.io/about/api/](https://datausa.io/about/api/)"
+					},
+					"response": [
+						{
+							"name": "Recent Population data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://datausa.io/api/data?drilldowns=Nation&measures=Population",
+									"protocol": "https",
+									"host": [
+										"datausa",
+										"io"
+									],
+									"path": [
+										"api",
+										"data"
+									],
+									"query": [
+										{
+											"key": "drilldowns",
+											"value": "Nation"
+										},
+										{
+											"key": "measures",
+											"value": "Population"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 23 Feb 2023 19:32:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-dns-prefetch-control",
+									"value": "off"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "x-download-options",
+									"value": "noopen"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "content-language",
+									"value": "en"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"5de-nIC6PX3cEGifOOBAdlSmcCVN9zA\""
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "last-modified",
+									"value": "Mon, 05 Dec 2022 21:02:20 GMT"
+								},
+								{
+									"key": "x-cache-status",
+									"value": "HIT"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type"
+								},
+								{
+									"key": "x-cache-key",
+									"value": "GET/api/data?drilldowns=Nation&measures=Population"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=1800"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "HIT"
+								},
+								{
+									"key": "Age",
+									"value": "172319"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=qPkG06N8q%2BKKa1hjYLudI3Nj9mhJdprggBSqm5gwhXAGqlwmL0CO4HYdxrUGIW96LWK04CtMiIV0eol1ujcyLKYermyG%2FgjFzFFaUcxntahIjEc%2FBgiBrrjT3dI%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "79e262a96fa18c65-EWR"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2020,\n            \"Year\": \"2020\",\n            \"Population\": 326569308,\n            \"Slug Nation\": \"united-states\"\n        },\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2019,\n            \"Year\": \"2019\",\n            \"Population\": 324697795,\n            \"Slug Nation\": \"united-states\"\n        },\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2018,\n            \"Year\": \"2018\",\n            \"Population\": 322903030,\n            \"Slug Nation\": \"united-states\"\n        },\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2017,\n            \"Year\": \"2017\",\n            \"Population\": 321004407,\n            \"Slug Nation\": \"united-states\"\n        },\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2016,\n            \"Year\": \"2016\",\n            \"Population\": 318558162,\n            \"Slug Nation\": \"united-states\"\n        },\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2015,\n            \"Year\": \"2015\",\n            \"Population\": 316515021,\n            \"Slug Nation\": \"united-states\"\n        },\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2014,\n            \"Year\": \"2014\",\n            \"Population\": 314107084,\n            \"Slug Nation\": \"united-states\"\n        },\n        {\n            \"ID Nation\": \"01000US\",\n            \"Nation\": \"United States\",\n            \"ID Year\": 2013,\n            \"Year\": \"2013\",\n            \"Population\": 311536594,\n            \"Slug Nation\": \"united-states\"\n        }\n    ],\n    \"source\": [\n        {\n            \"measures\": [\n                \"Population\"\n            ],\n            \"annotations\": {\n                \"source_name\": \"Census Bureau\",\n                \"source_description\": \"The American Community Survey (ACS) is conducted by the US Census and sent to a portion of the population every year.\",\n                \"dataset_name\": \"ACS 5-year Estimate\",\n                \"dataset_link\": \"http://www.census.gov/programs-surveys/acs/\",\n                \"table_id\": \"B01003\",\n                \"topic\": \"Diversity\",\n                \"subtopic\": \"Demographics\"\n            },\n            \"name\": \"acs_yg_total_population_5\",\n            \"substitutions\": []\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "With this API you can access US Gov data on various industries and departments\n\nLink: [https://datausa.io/about/api/](https://datausa.io/about/api/to)"
+		},
+		{
+			"name": "2. Teleport Public APIs",
+			"item": [
+				{
+					"name": "List of cities that match name \"Tokyo\"",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.teleport.org/api/cities/?search=tokyo",
+							"protocol": "https",
+							"host": [
+								"api",
+								"teleport",
+								"org"
+							],
+							"path": [
+								"api",
+								"cities",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "tokyo"
+								}
+							]
+						},
+						"description": "This request searches for cities by name and returns a list of all matching cities\n\nLink: [https://developers.teleport.org/api/reference/#/](https://developers.teleport.org/api/reference/#/)"
+					},
+					"response": [
+						{
+							"name": "List of cities that match name \"Tokyo\"",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.teleport.org/api/cities/?search=tokyo",
+									"protocol": "https",
+									"host": [
+										"api",
+										"teleport",
+										"org"
+									],
+									"path": [
+										"api",
+										"cities",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "tokyo"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "693"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:06:54 GMT"
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "600"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=300"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "X-Apiproxy-Cache-Status",
+									"value": "MISS"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin,Accept-Encoding"
+								},
+								{
+									"key": "X-Cache",
+									"value": "Hit from cloudfront"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 3ebe5e903d733a5e00724b1dfdba02bc.cloudfront.net (CloudFront)"
+								},
+								{
+									"key": "X-Amz-Cf-Pop",
+									"value": "IAD79-C3"
+								},
+								{
+									"key": "X-Amz-Cf-Id",
+									"value": "23Q2p17YqmTxXIhG0eXDC_lbbwMejBCFxf7DSWFrKRdL43HkFC6P5w=="
+								},
+								{
+									"key": "Age",
+									"value": "9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_embedded\": {\n        \"city:search-results\": [\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1850147/\"\n                    }\n                },\n                \"matching_alternate_names\": [\n                    {\n                        \"name\": \"Tokyo\"\n                    },\n                    {\n                        \"name\": \"tokyo\"\n                    }\n                ],\n                \"matching_full_name\": \"Tokyo, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1863440/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Hachiōji, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1857871/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Machida, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1864518/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Chōfu, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1850692/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Nishi-Tokyo-shi, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1860437/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Kamirenjaku, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1862599/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Hino, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:7279570/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Higashimurayama, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1854162/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Ōme, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1849186/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Urayasu, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1856367/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Musashino, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1858964/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Kokubunji, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1850693/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Tanashichō, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1907148/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Fussa, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:1861261/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Itsukaichi, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:11611487/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Tachikawa, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:11611617/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Kunitachi, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:11611618/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Miyake, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:11611619/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Hachijō, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:11611620/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Ōshima, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:11611621/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Ogasawara, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:6822129/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Tama, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:6822130/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Musashimurayama, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:6822132/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Akishima, Tokyo, Japan\"\n            },\n            {\n                \"_links\": {\n                    \"city:item\": {\n                        \"href\": \"https://api.teleport.org/api/cities/geonameid:6822136/\"\n                    }\n                },\n                \"matching_alternate_names\": [],\n                \"matching_full_name\": \"Higashiyamato, Tokyo, Japan\"\n            }\n        ]\n    },\n    \"_links\": {\n        \"curies\": [\n            {\n                \"href\": \"https://developers.teleport.org/api/resources/Location/#!/relations/{rel}/\",\n                \"name\": \"location\",\n                \"templated\": true\n            },\n            {\n                \"href\": \"https://developers.teleport.org/api/resources/City/#!/relations/{rel}/\",\n                \"name\": \"city\",\n                \"templated\": true\n            },\n            {\n                \"href\": \"https://developers.teleport.org/api/resources/UrbanArea/#!/relations/{rel}/\",\n                \"name\": \"ua\",\n                \"templated\": true\n            },\n            {\n                \"href\": \"https://developers.teleport.org/api/resources/Country/#!/relations/{rel}/\",\n                \"name\": \"country\",\n                \"templated\": true\n            },\n            {\n                \"href\": \"https://developers.teleport.org/api/resources/Admin1Division/#!/relations/{rel}/\",\n                \"name\": \"a1\",\n                \"templated\": true\n            },\n            {\n                \"href\": \"https://developers.teleport.org/api/resources/Timezone/#!/relations/{rel}/\",\n                \"name\": \"tz\",\n                \"templated\": true\n            }\n        ],\n        \"self\": {\n            \"href\": \"https://api.teleport.org/api/cities/?search=tokyo&geohash=\"\n        }\n    },\n    \"count\": 25\n}"
+						}
+					]
+				}
+			],
+			"description": "With this API you can get data on various cities such as quality of Life data (Education level, Environmental Quality, Internet Connectivity etc.)\n\nLink: [https://developers.teleport.org/api/reference/#/](https://developers.teleport.org/api/reference/#/)"
+		},
+		{
+			"name": "3. Open Brewery API",
+			"item": [
+				{
+					"name": "List of breweries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.openbrewerydb.org/breweries",
+							"protocol": "https",
+							"host": [
+								"api",
+								"openbrewerydb",
+								"org"
+							],
+							"path": [
+								"breweries"
+							]
+						},
+						"description": "This request returns a list of breweries.\n\nLink: [https://www.openbrewerydb.org/documentation](https://www.openbrewerydb.org/documentation)"
+					},
+					"response": [
+						{
+							"name": "List of breweries",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.openbrewerydb.org/breweries",
+									"protocol": "https",
+									"host": [
+										"api",
+										"openbrewerydb",
+										"org"
+									],
+									"path": [
+										"breweries"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:06:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=86400"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"9c606427fa6c77501752d304f1b8040a\""
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "88788e86-c785-4d7d-92e2-0c6c762d115d"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.014552"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "HIT"
+								},
+								{
+									"key": "Age",
+									"value": "20"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=JNYtxEBx0dVOhGsDLB%2Bil7W7rQ8G5jcovFNxRbsTJi%2BEvPMNBXhJzoFlnUe7sS5EMhLiNc1b8mlaSE1Lq6oa3GG%2FEzId0WFVpaj5UJa0G0BWJF6NQ%2F1tG5F7GMt%2BFymexd9IQfgeIao%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "79e8c378ea772363-EWR"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"10-56-brewing-company-knox\",\n        \"name\": \"10-56 Brewing Company\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"400 Brown Cir\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Knox\",\n        \"state\": \"Indiana\",\n        \"county_province\": null,\n        \"postal_code\": \"46534\",\n        \"country\": \"United States\",\n        \"longitude\": \"-86.627954\",\n        \"latitude\": \"41.289715\",\n        \"phone\": \"6308165790\",\n        \"website_url\": null,\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-barrel-brewing-co-bend-1\",\n        \"name\": \"10 Barrel Brewing Co\",\n        \"brewery_type\": \"large\",\n        \"street\": \"62970 18th St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Bend\",\n        \"state\": \"Oregon\",\n        \"county_province\": null,\n        \"postal_code\": \"97701-9847\",\n        \"country\": \"United States\",\n        \"longitude\": \"-121.28170597038259\",\n        \"latitude\": \"44.08683530625218\",\n        \"phone\": \"5415851007\",\n        \"website_url\": \"http://www.10barrel.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-barrel-brewing-co-bend-2\",\n        \"name\": \"10 Barrel Brewing Co\",\n        \"brewery_type\": \"large\",\n        \"street\": \"1135 NW Galveston Ave Ste B\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Bend\",\n        \"state\": \"Oregon\",\n        \"county_province\": null,\n        \"postal_code\": \"97703-2465\",\n        \"country\": \"United States\",\n        \"longitude\": \"-121.32880209261799\",\n        \"latitude\": \"44.057564901366796\",\n        \"phone\": \"5415851007\",\n        \"website_url\": null,\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-barrel-brewing-co-bend-pub-bend\",\n        \"name\": \"10 Barrel Brewing Co - Bend Pub\",\n        \"brewery_type\": \"large\",\n        \"street\": \"62950 NE 18th St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Bend\",\n        \"state\": \"Oregon\",\n        \"county_province\": null,\n        \"postal_code\": \"97701\",\n        \"country\": \"United States\",\n        \"longitude\": \"-121.2809536\",\n        \"latitude\": \"44.0912109\",\n        \"phone\": \"5415851007\",\n        \"website_url\": null,\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-barrel-brewing-co-boise-boise\",\n        \"name\": \"10 Barrel Brewing Co - Boise\",\n        \"brewery_type\": \"large\",\n        \"street\": \"826 W Bannock St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Boise\",\n        \"state\": \"Idaho\",\n        \"county_province\": null,\n        \"postal_code\": \"83702-5857\",\n        \"country\": \"United States\",\n        \"longitude\": \"-116.202929\",\n        \"latitude\": \"43.618516\",\n        \"phone\": \"2083445870\",\n        \"website_url\": \"http://www.10barrel.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-barrel-brewing-co-denver-denver\",\n        \"name\": \"10 Barrel Brewing Co - Denver\",\n        \"brewery_type\": \"large\",\n        \"street\": \"2620 Walnut St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Denver\",\n        \"state\": \"Colorado\",\n        \"county_province\": null,\n        \"postal_code\": \"80205-2231\",\n        \"country\": \"United States\",\n        \"longitude\": \"-104.9853655\",\n        \"latitude\": \"39.7592508\",\n        \"phone\": \"7205738992\",\n        \"website_url\": null,\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-barrel-brewing-co-portland\",\n        \"name\": \"10 Barrel Brewing Co\",\n        \"brewery_type\": \"large\",\n        \"street\": \"1411 NW Flanders St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Portland\",\n        \"state\": \"Oregon\",\n        \"county_province\": null,\n        \"postal_code\": \"97209-2620\",\n        \"country\": \"United States\",\n        \"longitude\": \"-122.6855056\",\n        \"latitude\": \"45.5259786\",\n        \"phone\": \"5032241700\",\n        \"website_url\": \"http://www.10barrel.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-barrel-brewing-co-san-diego\",\n        \"name\": \"10 Barrel Brewing Co\",\n        \"brewery_type\": \"large\",\n        \"street\": \"1501 E St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"San Diego\",\n        \"state\": \"California\",\n        \"county_province\": null,\n        \"postal_code\": \"92101-6618\",\n        \"country\": \"United States\",\n        \"longitude\": \"-117.129593\",\n        \"latitude\": \"32.714813\",\n        \"phone\": \"6195782311\",\n        \"website_url\": \"http://10barrel.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10-torr-distilling-and-brewing-reno\",\n        \"name\": \"10 Torr Distilling and Brewing\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"490 Mill St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Reno\",\n        \"state\": \"Nevada\",\n        \"county_province\": null,\n        \"postal_code\": \"89502\",\n        \"country\": \"United States\",\n        \"longitude\": \"-119.7732015\",\n        \"latitude\": \"39.5171702\",\n        \"phone\": \"7755307014\",\n        \"website_url\": \"http://www.10torr.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"101-brewery-quilcene\",\n        \"name\": \"101 Brewery\",\n        \"brewery_type\": \"brewpub\",\n        \"street\": \"294793 US Highway 101\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Quilcene\",\n        \"state\": \"Washington\",\n        \"county_province\": null,\n        \"postal_code\": \"98376-9000\",\n        \"country\": \"United States\",\n        \"longitude\": \"-122.87558226136872\",\n        \"latitude\": \"47.823475773720666\",\n        \"phone\": \"3607656485\",\n        \"website_url\": \"http://www.101brewery.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"101-north-brewing-company-petaluma\",\n        \"name\": \"101 North Brewing Company\",\n        \"brewery_type\": \"closed\",\n        \"street\": \"1304 Scott St Ste D\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Petaluma\",\n        \"state\": \"California\",\n        \"county_province\": null,\n        \"postal_code\": \"94954-7100\",\n        \"country\": \"United States\",\n        \"longitude\": \"-122.66505504468803\",\n        \"latitude\": \"38.270293813150886\",\n        \"phone\": \"7077534934\",\n        \"website_url\": \"http://www.101northbeer.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"105-west-brewing-co-castle-rock\",\n        \"name\": \"105 West Brewing Co\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"1043 Park St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Castle Rock\",\n        \"state\": \"Colorado\",\n        \"county_province\": null,\n        \"postal_code\": \"80109-1585\",\n        \"country\": \"United States\",\n        \"longitude\": \"-104.8667206\",\n        \"latitude\": \"39.38269495\",\n        \"phone\": \"3033257321\",\n        \"website_url\": \"http://www.105westbrewing.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10k-brewing-anoka\",\n        \"name\": \"10K Brewing\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"2005 2nd Ave\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Anoka\",\n        \"state\": \"Minnesota\",\n        \"county_province\": null,\n        \"postal_code\": \"55303-2243\",\n        \"country\": \"United States\",\n        \"longitude\": \"-93.38952559\",\n        \"latitude\": \"45.19812039\",\n        \"phone\": \"7633924753\",\n        \"website_url\": \"http://10KBrew.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"10th-district-brewing-company-abington\",\n        \"name\": \"10th District Brewing Company\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"491 Washington St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Abington\",\n        \"state\": \"Massachusetts\",\n        \"county_province\": null,\n        \"postal_code\": \"02351-2419\",\n        \"country\": \"United States\",\n        \"longitude\": \"-70.94594149\",\n        \"latitude\": \"42.10591754\",\n        \"phone\": \"7813071554\",\n        \"website_url\": \"http://www.10thdistrictbrewing.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"11-below-brewing-company-houston\",\n        \"name\": \"11 Below Brewing Company\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"6820 Bourgeois Rd\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Houston\",\n        \"state\": \"Texas\",\n        \"county_province\": null,\n        \"postal_code\": \"77066-3107\",\n        \"country\": \"United States\",\n        \"longitude\": \"-95.5186591\",\n        \"latitude\": \"29.9515464\",\n        \"phone\": \"2814442337\",\n        \"website_url\": \"http://www.11belowbrewing.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"1188-brewing-co-john-day\",\n        \"name\": \"1188 Brewing Co\",\n        \"brewery_type\": \"brewpub\",\n        \"street\": \"141 E Main St\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"John Day\",\n        \"state\": \"Oregon\",\n        \"county_province\": null,\n        \"postal_code\": \"97845-1210\",\n        \"country\": \"United States\",\n        \"longitude\": \"-118.9218754\",\n        \"latitude\": \"44.4146563\",\n        \"phone\": \"5415751188\",\n        \"website_url\": \"http://www.1188brewing.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"12-acres-brewing-company-killeshin\",\n        \"name\": \"12 Acres Brewing Company\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"Unnamed Street\",\n        \"address_2\": \"Clonmore\",\n        \"address_3\": null,\n        \"city\": \"Killeshin\",\n        \"state\": null,\n        \"county_province\": \"Laois\",\n        \"postal_code\": \"R93 X3X8\",\n        \"country\": \"Ireland\",\n        \"longitude\": \"-6.979343891\",\n        \"latitude\": \"52.84930763\",\n        \"phone\": \"+353599107299\",\n        \"website_url\": \"https://12acresbrewing.ie/\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"12-gates-brewing-company-williamsville\",\n        \"name\": \"12 Gates Brewing Company\",\n        \"brewery_type\": \"brewpub\",\n        \"street\": \"80 Earhart Dr Ste 20\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Williamsville\",\n        \"state\": \"New York\",\n        \"county_province\": null,\n        \"postal_code\": \"14221-7804\",\n        \"country\": \"United States\",\n        \"longitude\": null,\n        \"latitude\": null,\n        \"phone\": \"7169066600\",\n        \"website_url\": \"http://www.12gatesbrewing.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"12-west-brewing-company-gilbert\",\n        \"name\": \"12 West Brewing Company\",\n        \"brewery_type\": \"micro\",\n        \"street\": \"3000 E Ray Rd Bldg 6\",\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Gilbert\",\n        \"state\": \"Arizona\",\n        \"county_province\": null,\n        \"postal_code\": \"85296-7832\",\n        \"country\": \"United States\",\n        \"longitude\": null,\n        \"latitude\": null,\n        \"phone\": \"6023395014\",\n        \"website_url\": \"http://www.12westbrewing.com\",\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    },\n    {\n        \"id\": \"12-west-brewing-company-production-facility-mesa\",\n        \"name\": \"12 West Brewing Company - Production Facility\",\n        \"brewery_type\": \"micro\",\n        \"street\": null,\n        \"address_2\": null,\n        \"address_3\": null,\n        \"city\": \"Mesa\",\n        \"state\": \"Arizona\",\n        \"county_province\": null,\n        \"postal_code\": \"85207\",\n        \"country\": \"United States\",\n        \"longitude\": \"-111.5860662\",\n        \"latitude\": \"33.436188\",\n        \"phone\": null,\n        \"website_url\": null,\n        \"updated_at\": \"2023-02-21T01:41:59.300Z\",\n        \"created_at\": \"2023-02-21T01:41:59.300Z\"\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Open Brewery DB is a free dataset and API with public information on breweries, cideries, brewpubs, and bottleshops.\n\nLink: [https://www.openbrewerydb.org/](https://www.openbrewerydb.org/)"
+		},
+		{
+			"name": "4. NYC Parks & Rec Properties API",
+			"item": [
+				{
+					"name": "location of property",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://data.cityofnewyork.us/resource/enfh-gkve.json?location=100 St., 98 St. bet. 24 Ave. and 25 Ave.",
+							"protocol": "https",
+							"host": [
+								"data",
+								"cityofnewyork",
+								"us"
+							],
+							"path": [
+								"resource",
+								"enfh-gkve.json"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "100 St., 98 St. bet. 24 Ave. and 25 Ave."
+								}
+							]
+						},
+						"description": "This request gets a description of the location of a property with respect to the street system and physical features such as water bodies.\n\nLink: [https://dev.socrata.com/foundry/data.cityofnewyork.us/enfh-gkve](https://dev.socrata.com/foundry/data.cityofnewyork.us/enfh-gkve)"
+					},
+					"response": [
+						{
+							"name": "location of property",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://data.cityofnewyork.us/resource/enfh-gkve.json?location=100 St., 98 St. bet. 24 Ave. and 25 Ave.",
+									"protocol": "https",
+									"host": [
+										"data",
+										"cityofnewyork",
+										"us"
+									],
+									"path": [
+										"resource",
+										"enfh-gkve.json"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "100 St., 98 St. bet. 24 Ave. and 25 Ave."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:52:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "\"Y2hhcmxpZS42MzUyMV8xXzc0LUgzVE1sYlF3TTVNajZaUHVfNnNyaWZqcXNj---gzipsQwH3P0Uqpkh8kxwsY79HFkxrKY--gzip--gzip\""
+								},
+								{
+									"key": "X-SODA2-Fields",
+									"value": "[\"acquisitiondate\",\"acres\",\"address\",\"borough\",\"class\",\"communityboard\",\"councildistrict\",\"department\",\"eapply\",\"gisobjid\",\"gispropnum\",\"globalid\",\"jurisdiction\",\"location\",\"mapped\",\"name311\",\"nys_assembly\",\"nys_senate\",\"objectid\",\"omppropid\",\"parentid\",\"permit\",\"permitdistrict\",\"permitparent\",\"pip_ratable\",\"precinct\",\"retired\",\"signname\",\"subcategory\",\"typecategory\",\"url\",\"us_congress\",\"waterfront\",\"zipcode\",\"multipolygon\"]"
+								},
+								{
+									"key": "X-SODA2-Types",
+									"value": "[\"text\",\"number\",\"text\",\"text\",\"text\",\"number\",\"number\",\"text\",\"text\",\"number\",\"text\",\"text\",\"text\",\"text\",\"text\",\"text\",\"number\",\"number\",\"number\",\"text\",\"text\",\"boolean\",\"text\",\"text\",\"boolean\",\"number\",\"boolean\",\"text\",\"text\",\"text\",\"text\",\"number\",\"boolean\",\"number\",\"multipolygon\"]"
+								},
+								{
+									"key": "X-SODA2-Data-Out-Of-Date",
+									"value": "false"
+								},
+								{
+									"key": "X-SODA2-Truth-Last-Modified",
+									"value": "Wed, 11 Jan 2023 14:04:33 GMT"
+								},
+								{
+									"key": "X-SODA2-Secondary-Last-Modified",
+									"value": "Wed, 11 Jan 2023 14:04:33 GMT"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Wed, 11 Jan 2023 14:04:33 GMT"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Age",
+									"value": "0"
+								},
+								{
+									"key": "X-Socrata-Region",
+									"value": "aws-us-east-1-fedramp-prod"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Socrata-RequestId",
+									"value": "9b630f8b5bdca1bf7b596a07c884b940"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"acquisitiondate\": \"1951-08-09 00:00:00.0000000\",\n        \"acres\": \"3.827\",\n        \"address\": \"98-01 25 AVENUE\",\n        \"borough\": \"Q\",\n        \"class\": \"PARK\",\n        \"communityboard\": \"403\",\n        \"councildistrict\": \"21\",\n        \"department\": \"Q-03\",\n        \"eapply\": \"East Elmhurst Playground\",\n        \"gisobjid\": \"100000140\",\n        \"gispropnum\": \"Q373\",\n        \"globalid\": \"FE80558A-00B8-4825-95A5-2805EA0E0CEE\",\n        \"jurisdiction\": \"DPR/DOE\",\n        \"location\": \"100 St., 98 St. bet. 24 Ave. and 25 Ave.\",\n        \"mapped\": \"False\",\n        \"name311\": \"Helen Marshall Playground\",\n        \"nys_assembly\": \"35\",\n        \"nys_senate\": \"13\",\n        \"objectid\": \"4881\",\n        \"omppropid\": \"Q373\",\n        \"parentid\": \"Q-03\",\n        \"permit\": true,\n        \"permitdistrict\": \"Q-03\",\n        \"permitparent\": \"Q-03\",\n        \"pip_ratable\": true,\n        \"precinct\": \"115\",\n        \"retired\": false,\n        \"signname\": \"Helen Marshall Playground\",\n        \"subcategory\": \"JOP\",\n        \"typecategory\": \"Jointly Operated Playground\",\n        \"url\": \"http://www.nycgovparks.org/parks/Q373/\",\n        \"us_congress\": \"14\",\n        \"waterfront\": false,\n        \"zipcode\": \"11369\",\n        \"multipolygon\": {\n            \"type\": \"MultiPolygon\",\n            \"coordinates\": [\n                [\n                    [\n                        [\n                            -73.8702121052178,\n                            40.7662630696453\n                        ],\n                        [\n                            -73.87159149375225,\n                            40.766119156735826\n                        ],\n                        [\n                            -73.87154383479682,\n                            40.765855196258364\n                        ],\n                        [\n                            -73.87189254360733,\n                            40.765818813309885\n                        ],\n                        [\n                            -73.87180955940245,\n                            40.76535920237023\n                        ],\n                        [\n                            -73.87111215081137,\n                            40.76543199193358\n                        ],\n                        [\n                            -73.87100128360814,\n                            40.76481790537266\n                        ],\n                        [\n                            -73.86997221783915,\n                            40.76492355655017\n                        ],\n                        [\n                            -73.8702121052178,\n                            40.7662630696453\n                        ]\n                    ]\n                ]\n            ]\n        }\n    }\n]"
+						},
+						{
+							"name": "location of property",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://data.cityofnewyork.us/resource/enfh-gkve.json?location=100 St., 98 St. bet. 24 Ave. and 25 Ave.",
+									"protocol": "https",
+									"host": [
+										"data",
+										"cityofnewyork",
+										"us"
+									],
+									"path": [
+										"resource",
+										"enfh-gkve.json"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "100 St., 98 St. bet. 24 Ave. and 25 Ave."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:52:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "\"Y2hhcmxpZS42MzUyMV8xXzc0LUgzVE1sYlF3TTVNajZaUHVfNnNyaWZqcXNj---gzipsQwH3P0Uqpkh8kxwsY79HFkxrKY--gzip--gzip\""
+								},
+								{
+									"key": "X-SODA2-Fields",
+									"value": "[\"acquisitiondate\",\"acres\",\"address\",\"borough\",\"class\",\"communityboard\",\"councildistrict\",\"department\",\"eapply\",\"gisobjid\",\"gispropnum\",\"globalid\",\"jurisdiction\",\"location\",\"mapped\",\"name311\",\"nys_assembly\",\"nys_senate\",\"objectid\",\"omppropid\",\"parentid\",\"permit\",\"permitdistrict\",\"permitparent\",\"pip_ratable\",\"precinct\",\"retired\",\"signname\",\"subcategory\",\"typecategory\",\"url\",\"us_congress\",\"waterfront\",\"zipcode\",\"multipolygon\"]"
+								},
+								{
+									"key": "X-SODA2-Types",
+									"value": "[\"text\",\"number\",\"text\",\"text\",\"text\",\"number\",\"number\",\"text\",\"text\",\"number\",\"text\",\"text\",\"text\",\"text\",\"text\",\"text\",\"number\",\"number\",\"number\",\"text\",\"text\",\"boolean\",\"text\",\"text\",\"boolean\",\"number\",\"boolean\",\"text\",\"text\",\"text\",\"text\",\"number\",\"boolean\",\"number\",\"multipolygon\"]"
+								},
+								{
+									"key": "X-SODA2-Data-Out-Of-Date",
+									"value": "false"
+								},
+								{
+									"key": "X-SODA2-Truth-Last-Modified",
+									"value": "Wed, 11 Jan 2023 14:04:33 GMT"
+								},
+								{
+									"key": "X-SODA2-Secondary-Last-Modified",
+									"value": "Wed, 11 Jan 2023 14:04:33 GMT"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Wed, 11 Jan 2023 14:04:33 GMT"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Age",
+									"value": "0"
+								},
+								{
+									"key": "X-Socrata-Region",
+									"value": "aws-us-east-1-fedramp-prod"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Socrata-RequestId",
+									"value": "9b630f8b5bdca1bf7b596a07c884b940"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"acquisitiondate\": \"1951-08-09 00:00:00.0000000\",\n        \"acres\": \"3.827\",\n        \"address\": \"98-01 25 AVENUE\",\n        \"borough\": \"Q\",\n        \"class\": \"PARK\",\n        \"communityboard\": \"403\",\n        \"councildistrict\": \"21\",\n        \"department\": \"Q-03\",\n        \"eapply\": \"East Elmhurst Playground\",\n        \"gisobjid\": \"100000140\",\n        \"gispropnum\": \"Q373\",\n        \"globalid\": \"FE80558A-00B8-4825-95A5-2805EA0E0CEE\",\n        \"jurisdiction\": \"DPR/DOE\",\n        \"location\": \"100 St., 98 St. bet. 24 Ave. and 25 Ave.\",\n        \"mapped\": \"False\",\n        \"name311\": \"Helen Marshall Playground\",\n        \"nys_assembly\": \"35\",\n        \"nys_senate\": \"13\",\n        \"objectid\": \"4881\",\n        \"omppropid\": \"Q373\",\n        \"parentid\": \"Q-03\",\n        \"permit\": true,\n        \"permitdistrict\": \"Q-03\",\n        \"permitparent\": \"Q-03\",\n        \"pip_ratable\": true,\n        \"precinct\": \"115\",\n        \"retired\": false,\n        \"signname\": \"Helen Marshall Playground\",\n        \"subcategory\": \"JOP\",\n        \"typecategory\": \"Jointly Operated Playground\",\n        \"url\": \"http://www.nycgovparks.org/parks/Q373/\",\n        \"us_congress\": \"14\",\n        \"waterfront\": false,\n        \"zipcode\": \"11369\",\n        \"multipolygon\": {\n            \"type\": \"MultiPolygon\",\n            \"coordinates\": [\n                [\n                    [\n                        [\n                            -73.8702121052178,\n                            40.7662630696453\n                        ],\n                        [\n                            -73.87159149375225,\n                            40.766119156735826\n                        ],\n                        [\n                            -73.87154383479682,\n                            40.765855196258364\n                        ],\n                        [\n                            -73.87189254360733,\n                            40.765818813309885\n                        ],\n                        [\n                            -73.87180955940245,\n                            40.76535920237023\n                        ],\n                        [\n                            -73.87111215081137,\n                            40.76543199193358\n                        ],\n                        [\n                            -73.87100128360814,\n                            40.76481790537266\n                        ],\n                        [\n                            -73.86997221783915,\n                            40.76492355655017\n                        ],\n                        [\n                            -73.8702121052178,\n                            40.7662630696453\n                        ]\n                    ]\n                ]\n            ]\n        }\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "This API provides access to property data managed partially or solely by NYC Parks.\n\n[https://dev.socrata.com/foundry/data.cityofnewyork.us/enfh-gkve](https://dev.socrata.com/foundry/data.cityofnewyork.us/enfh-gkve)"
+		},
+		{
+			"name": "5. Sunset and Sunrise Times API",
+			"item": [
+				{
+					"name": "Sunrise & Sunset times",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873&timezone=UTC&date=today\nhttps://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873&timezone=UTC&date=1990-05-22",
+							"protocol": "https",
+							"host": [
+								"api",
+								"sunrisesunset",
+								"io"
+							],
+							"path": [
+								"json"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "38.907192"
+								},
+								{
+									"key": "lng",
+									"value": "-77.036873"
+								},
+								{
+									"key": "timezone",
+									"value": "UTC"
+								},
+								{
+									"key": "date",
+									"value": "today\nhttps://api.sunrisesunset.io/json?lat=38.907192"
+								},
+								{
+									"key": "lng",
+									"value": "-77.036873"
+								},
+								{
+									"key": "timezone",
+									"value": "UTC"
+								},
+								{
+									"key": "date",
+									"value": "1990-05-22"
+								}
+							]
+						},
+						"description": "This request gets the current day's sunrise and sunset times  \n  \n  \nLink: [https://sunrisesunset.io/api/](https://sunrisesunset.io/api/)"
+					},
+					"response": [
+						{
+							"name": "Sunrise & Sunset times",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873&timezone=UTC&date=today\nhttps://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873&timezone=UTC&date=1990-05-22",
+									"protocol": "https",
+									"host": [
+										"api",
+										"sunrisesunset",
+										"io"
+									],
+									"path": [
+										"json"
+									],
+									"query": [
+										{
+											"key": "lat",
+											"value": "38.907192"
+										},
+										{
+											"key": "lng",
+											"value": "-77.036873"
+										},
+										{
+											"key": "timezone",
+											"value": "UTC"
+										},
+										{
+											"key": "date",
+											"value": "today\nhttps://api.sunrisesunset.io/json?lat=38.907192"
+										},
+										{
+											"key": "lng",
+											"value": "-77.036873"
+										},
+										{
+											"key": "timezone",
+											"value": "UTC"
+										},
+										{
+											"key": "date",
+											"value": "1990-05-22"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:52:22 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "79e9065018f88cd6-EWR"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "s-max-age=480, max-age=480"
+								},
+								{
+									"key": "Link",
+									"value": "<https://sunrisesunset.io/wp-json/>; rel=\"https://api.w.org/\""
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "fastcgi-cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-ua-compatible",
+									"value": "IE=edge"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=SoEv2xeXL4haxwtnKVcgL0HiNsl0byORf3mVZ%2FagRAkuk7mZhJLYrsc43NBtE3wZFVZboYO2CpJ0n%2FPXosyZSujyYJkIy6tLWSejRxbQyTqB8GGuIZzoTbSJoN0NM0epe6gGGkf9Xw%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"results\": {\n        \"sunrise\": \"9:52:03 AM\",\n        \"sunset\": \"12:20:22 AM\",\n        \"first_light\": \"8:01:33 AM\",\n        \"last_light\": \"2:10:52 AM\",\n        \"dawn\": \"9:21:29 AM\",\n        \"dusk\": \"12:50:56 AM\",\n        \"solar_noon\": \"5:06:12 PM\",\n        \"golden_hour\": \"11:41:50 PM\",\n        \"day_length\": \"14:28:19\",\n        \"timezone\": \"UTC\"\n    },\n    \"status\": \"OK\"\n}"
+						}
+					]
+				}
+			],
+			"description": "SunriseSunset.io offers a **free API** for retrieving sunrise and sunset times for a specific longitude and latitude.\n\nLink: [https://sunrisesunset.io/api/](https://sunrisesunset.io/api/)"
+		},
+		{
+			"name": "6. MusicBrainz API",
+			"item": [
+				{
+					"name": "Data on rock band Nirvana",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=aliases",
+							"protocol": "http",
+							"host": [
+								"musicbrainz",
+								"org"
+							],
+							"path": [
+								"ws",
+								"2",
+								"artist",
+								"5b11f4ce-a62d-471e-81fc-a69a8278c7da"
+							],
+							"query": [
+								{
+									"key": "inc",
+									"value": "aliases"
+								}
+							]
+						},
+						"description": "This request returns data for the rock band Nirvana\n\nLink: [https://musicbrainz.org/doc/MusicBrainz_API/Examples](https://musicbrainz.org/doc/MusicBrainz_API/Examples)"
+					},
+					"response": [
+						{
+							"name": "Data on rock band Nirvana",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=aliases",
+									"protocol": "http",
+									"host": [
+										"musicbrainz",
+										"org"
+									],
+									"path": [
+										"ws",
+										"2",
+										"artist",
+										"5b11f4ce-a62d-471e-81fc-a69a8278c7da"
+									],
+									"query": [
+										{
+											"key": "inc",
+											"value": "aliases"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:52:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=15"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1200"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "708"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1677250363"
+								},
+								{
+									"key": "Server",
+									"value": "Plack::Handler::Starlet"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"75154333f0383ff8792045ae48efb412\""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Cache-Status",
+									"value": "MISS"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<metadata xmlns=\"http://musicbrainz.org/ns/mmd-2.0#\">\n    <artist id=\"5b11f4ce-a62d-471e-81fc-a69a8278c7da\" type=\"Group\" type-id=\"e431f5f6-b5d2-343d-8b36-72607fffb74b\">\n        <name>Nirvana</name>\n        <sort-name>Nirvana</sort-name>\n        <disambiguation>90s US grunge band</disambiguation>\n        <isni-list>\n            <isni>0000000123486830</isni>\n            <isni>0000000123487390</isni>\n        </isni-list>\n        <country>US</country>\n        <area id=\"489ce91b-6658-3307-9877-795b68554c98\">\n            <name>United States</name>\n            <sort-name>United States</sort-name>\n            <iso-3166-1-code-list>\n                <iso-3166-1-code>US</iso-3166-1-code>\n            </iso-3166-1-code-list>\n        </area>\n        <begin-area id=\"a640b45c-c173-49b1-8030-973603e895b5\">\n            <name>Aberdeen</name>\n            <sort-name>Aberdeen</sort-name>\n        </begin-area>\n        <life-span>\n            <begin>1988-01</begin>\n            <end>1994-04-05</end>\n            <ended>true</ended>\n        </life-span>\n        <alias-list count=\"3\">\n            <alias locale=\"en\" sort-name=\"Nirvana\" type=\"Artist name\" type-id=\"894afba6-2816-3c24-8072-eadb66bd04bc\" primary=\"primary\">Nirvana</alias>\n            <alias sort-name=\"Nirvana US\">Nirvana US</alias>\n            <alias locale=\"ja\" sort-name=\"ニルヴァーナ\" type=\"Artist name\" type-id=\"894afba6-2816-3c24-8072-eadb66bd04bc\" primary=\"primary\">ニルヴァーナ</alias>\n        </alias-list>\n    </artist>\n</metadata>"
+						}
+					]
+				}
+			],
+			"description": "With this API you can look up information about a particular MusicBrainz artist/group  \n(\"give me info about The Beatles\"), browse the data to find entities connected to a particular entity (\"show me all releases by The Beatles\"), or search for entities matching a specific query (\"show me  \nall artists matching the query 'Beatles' so I can find the one I want and ask for more data\").\n\nLink: [https://musicbrainz.org/doc/MusicBrainz_API](https://musicbrainz.org/doc/MusicBrainz_API)"
+		},
+		{
+			"name": "7. Universities API",
+			"item": [
+				{
+					"name": "University name and domain",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://universities.hipolabs.com/search?name=middle&country=turkey",
+							"protocol": "http",
+							"host": [
+								"universities",
+								"hipolabs",
+								"com"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "middle"
+								},
+								{
+									"key": "country",
+									"value": "turkey"
+								}
+							]
+						},
+						"description": "This request gets a university name and domain given a search term and country\n\nLink: [https://github.com/Hipo/university-domains-list](https://github.com/Hipo/university-domains-list)"
+					},
+					"response": [
+						{
+							"name": "University name and domain",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://universities.hipolabs.com/search?name=middle&country=turkey",
+									"protocol": "http",
+									"host": [
+										"universities",
+										"hipolabs",
+										"com"
+									],
+									"path": [
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "middle"
+										},
+										{
+											"key": "country",
+											"value": "turkey"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Feb 2023 22:17:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "185"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"domains\": [\n            \"metu.edu.tr\"\n        ],\n        \"name\": \"Middle East Technical University\",\n        \"web_pages\": [\n            \"http://www.metu.edu.tr/\"\n        ],\n        \"country\": \"Turkey\",\n        \"state-province\": null,\n        \"alpha_two_code\": \"TR\"\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "With this API you can get access data on a list of universities and their domain names\n\nExample usecases:\n\n- You can create a validation script that checks the email domain.\n- You can automatically generate a user's country and university by looking at their emails.\n    \n\n[https://github.com/Hipo/university-domains-list](https://github.com/Hipo/university-domains-list)"
+		},
+		{
+			"name": "8. OpenFDA API",
+			"item": [
+				{
+					"name": "Drug record",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.fda.gov/drug/event.json?limit=1",
+							"protocol": "https",
+							"host": [
+								"api",
+								"fda",
+								"gov"
+							],
+							"path": [
+								"drug",
+								"event.json"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						},
+						"description": "This request searches in the `drug/event`endpoint for a single record, and returns it. The record contains all kinds of information about the adverse event report, including the drugs that the patient was taking, the reactions that the patient experienced, and a good deal of other context.\n\nEach endpoint has its own unique fields, particular to the kind of data that it serves.\n\nLink: [https://open.fda.gov/apis/try-the-api/](https://open.fda.gov/apis/try-the-api/)"
+					},
+					"response": [
+						{
+							"name": "Drug record",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.fda.gov/drug/event.json?limit=1",
+									"protocol": "https",
+									"host": [
+										"api",
+										"fda",
+										"gov"
+									],
+									"path": [
+										"drug",
+										"event.json"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 23 Feb 2023 22:46:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Age",
+									"value": "2"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, must-revalidate"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'none'"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"71b-WyjqcB/pDS6NNwJAoYOCzJ/FpZU\""
+								},
+								{
+									"key": "Link",
+									"value": "<https://api.fda.gov/drug/event.json?limit=1&skip=0&search_after=0%3D1000000032>; rel=\"next\""
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000;"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Via",
+									"value": "http/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])"
+								},
+								{
+									"key": "X-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Vcap-Request-Id",
+									"value": "bf954db3-168f-421a-59ed-e904955a6afa"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "deny"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"disclaimer\": \"Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.\",\n        \"terms\": \"https://open.fda.gov/terms/\",\n        \"license\": \"https://open.fda.gov/license/\",\n        \"last_updated\": \"2023-01-30\",\n        \"results\": {\n            \"skip\": 0,\n            \"limit\": 1,\n            \"total\": 16011276\n        }\n    },\n    \"results\": [\n        {\n            \"safetyreportid\": \"5801206-7\",\n            \"transmissiondateformat\": \"102\",\n            \"transmissiondate\": \"20090109\",\n            \"serious\": \"1\",\n            \"seriousnessdeath\": \"1\",\n            \"receivedateformat\": \"102\",\n            \"receivedate\": \"20080707\",\n            \"receiptdateformat\": \"102\",\n            \"receiptdate\": \"20080625\",\n            \"fulfillexpeditecriteria\": \"1\",\n            \"companynumb\": \"JACAN16471\",\n            \"primarysource\": {\n                \"reportercountry\": \"CANADA\",\n                \"qualification\": \"3\"\n            },\n            \"sender\": {\n                \"senderorganization\": \"FDA-Public Use\"\n            },\n            \"receiver\": null,\n            \"patient\": {\n                \"patientonsetage\": \"26\",\n                \"patientonsetageunit\": \"801\",\n                \"patientsex\": \"1\",\n                \"patientdeath\": {\n                    \"patientdeathdateformat\": null,\n                    \"patientdeathdate\": null\n                },\n                \"reaction\": [\n                    {\n                        \"reactionmeddrapt\": \"DRUG ADMINISTRATION ERROR\"\n                    },\n                    {\n                        \"reactionmeddrapt\": \"OVERDOSE\"\n                    }\n                ],\n                \"drug\": [\n                    {\n                        \"drugcharacterization\": \"1\",\n                        \"medicinalproduct\": \"DURAGESIC-100\",\n                        \"drugauthorizationnumb\": \"019813\",\n                        \"drugadministrationroute\": \"041\",\n                        \"drugindication\": \"DRUG ABUSE\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "openFDA is an [Elasticsearch-based](http://www.elasticsearch.org/) API that serves public [FDA](http://www.fda.gov/) data about nouns like [drugs](https://open.fda.gov/apis/drug/), [devices](https://open.fda.gov/apis/device/), and [foods](https://open.fda.gov/apis/food/).\n\nLink: [https://open.fda.gov/apis/](https://open.fda.gov/apis/)"
+		},
+		{
+			"name": "9. Free Weather API",
+			"item": [
+				{
+					"name": "Current & future weather forecast",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true&hourly=temperature_2m,relativehumidity_2m,windspeed_10m",
+							"protocol": "https",
+							"host": [
+								"api",
+								"open-meteo",
+								"com"
+							],
+							"path": [
+								"v1",
+								"forecast"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "52.52"
+								},
+								{
+									"key": "longitude",
+									"value": "13.41"
+								},
+								{
+									"key": "current_weather",
+									"value": "true"
+								},
+								{
+									"key": "hourly",
+									"value": "temperature_2m,relativehumidity_2m,windspeed_10m"
+								}
+							]
+						},
+						"description": "This request gets the current weather and future weather forecasts\n\nLink: [https://open-meteo.com/](https://open-meteo.com/)"
+					},
+					"response": [
+						{
+							"name": "Current & future weather forecast",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true&hourly=temperature_2m,relativehumidity_2m,windspeed_10m",
+									"protocol": "https",
+									"host": [
+										"api",
+										"open-meteo",
+										"com"
+									],
+									"path": [
+										"v1",
+										"forecast"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": "52.52"
+										},
+										{
+											"key": "longitude",
+											"value": "13.41"
+										},
+										{
+											"key": "current_weather",
+											"value": "true"
+										},
+										{
+											"key": "hourly",
+											"value": "temperature_2m,relativehumidity_2m,windspeed_10m"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:53:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "deflate"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"latitude\": 52.52,\n    \"longitude\": 13.419998,\n    \"generationtime_ms\": 0.7309913635253906,\n    \"utc_offset_seconds\": 0,\n    \"timezone\": \"GMT\",\n    \"timezone_abbreviation\": \"GMT\",\n    \"elevation\": 38,\n    \"current_weather\": {\n        \"temperature\": 2.8,\n        \"windspeed\": 18.9,\n        \"winddirection\": 235,\n        \"weathercode\": 61,\n        \"time\": \"2023-02-24T14:00\"\n    },\n    \"hourly_units\": {\n        \"time\": \"iso8601\",\n        \"temperature_2m\": \"°C\",\n        \"relativehumidity_2m\": \"%\",\n        \"windspeed_10m\": \"km/h\"\n    },\n    \"hourly\": {\n        \"time\": [\n            \"2023-02-24T00:00\",\n            \"2023-02-24T01:00\",\n            \"2023-02-24T02:00\",\n            \"2023-02-24T03:00\",\n            \"2023-02-24T04:00\",\n            \"2023-02-24T05:00\",\n            \"2023-02-24T06:00\",\n            \"2023-02-24T07:00\",\n            \"2023-02-24T08:00\",\n            \"2023-02-24T09:00\",\n            \"2023-02-24T10:00\",\n            \"2023-02-24T11:00\",\n            \"2023-02-24T12:00\",\n            \"2023-02-24T13:00\",\n            \"2023-02-24T14:00\",\n            \"2023-02-24T15:00\",\n            \"2023-02-24T16:00\",\n            \"2023-02-24T17:00\",\n            \"2023-02-24T18:00\",\n            \"2023-02-24T19:00\",\n            \"2023-02-24T20:00\",\n            \"2023-02-24T21:00\",\n            \"2023-02-24T22:00\",\n            \"2023-02-24T23:00\",\n            \"2023-02-25T00:00\",\n            \"2023-02-25T01:00\",\n            \"2023-02-25T02:00\",\n            \"2023-02-25T03:00\",\n            \"2023-02-25T04:00\",\n            \"2023-02-25T05:00\",\n            \"2023-02-25T06:00\",\n            \"2023-02-25T07:00\",\n            \"2023-02-25T08:00\",\n            \"2023-02-25T09:00\",\n            \"2023-02-25T10:00\",\n            \"2023-02-25T11:00\",\n            \"2023-02-25T12:00\",\n            \"2023-02-25T13:00\",\n            \"2023-02-25T14:00\",\n            \"2023-02-25T15:00\",\n            \"2023-02-25T16:00\",\n            \"2023-02-25T17:00\",\n            \"2023-02-25T18:00\",\n            \"2023-02-25T19:00\",\n            \"2023-02-25T20:00\",\n            \"2023-02-25T21:00\",\n            \"2023-02-25T22:00\",\n            \"2023-02-25T23:00\",\n            \"2023-02-26T00:00\",\n            \"2023-02-26T01:00\",\n            \"2023-02-26T02:00\",\n            \"2023-02-26T03:00\",\n            \"2023-02-26T04:00\",\n            \"2023-02-26T05:00\",\n            \"2023-02-26T06:00\",\n            \"2023-02-26T07:00\",\n            \"2023-02-26T08:00\",\n            \"2023-02-26T09:00\",\n            \"2023-02-26T10:00\",\n            \"2023-02-26T11:00\",\n            \"2023-02-26T12:00\",\n            \"2023-02-26T13:00\",\n            \"2023-02-26T14:00\",\n            \"2023-02-26T15:00\",\n            \"2023-02-26T16:00\",\n            \"2023-02-26T17:00\",\n            \"2023-02-26T18:00\",\n            \"2023-02-26T19:00\",\n            \"2023-02-26T20:00\",\n            \"2023-02-26T21:00\",\n            \"2023-02-26T22:00\",\n            \"2023-02-26T23:00\",\n            \"2023-02-27T00:00\",\n            \"2023-02-27T01:00\",\n            \"2023-02-27T02:00\",\n            \"2023-02-27T03:00\",\n            \"2023-02-27T04:00\",\n            \"2023-02-27T05:00\",\n            \"2023-02-27T06:00\",\n            \"2023-02-27T07:00\",\n            \"2023-02-27T08:00\",\n            \"2023-02-27T09:00\",\n            \"2023-02-27T10:00\",\n            \"2023-02-27T11:00\",\n            \"2023-02-27T12:00\",\n            \"2023-02-27T13:00\",\n            \"2023-02-27T14:00\",\n            \"2023-02-27T15:00\",\n            \"2023-02-27T16:00\",\n            \"2023-02-27T17:00\",\n            \"2023-02-27T18:00\",\n            \"2023-02-27T19:00\",\n            \"2023-02-27T20:00\",\n            \"2023-02-27T21:00\",\n            \"2023-02-27T22:00\",\n            \"2023-02-27T23:00\",\n            \"2023-02-28T00:00\",\n            \"2023-02-28T01:00\",\n            \"2023-02-28T02:00\",\n            \"2023-02-28T03:00\",\n            \"2023-02-28T04:00\",\n            \"2023-02-28T05:00\",\n            \"2023-02-28T06:00\",\n            \"2023-02-28T07:00\",\n            \"2023-02-28T08:00\",\n            \"2023-02-28T09:00\",\n            \"2023-02-28T10:00\",\n            \"2023-02-28T11:00\",\n            \"2023-02-28T12:00\",\n            \"2023-02-28T13:00\",\n            \"2023-02-28T14:00\",\n            \"2023-02-28T15:00\",\n            \"2023-02-28T16:00\",\n            \"2023-02-28T17:00\",\n            \"2023-02-28T18:00\",\n            \"2023-02-28T19:00\",\n            \"2023-02-28T20:00\",\n            \"2023-02-28T21:00\",\n            \"2023-02-28T22:00\",\n            \"2023-02-28T23:00\",\n            \"2023-03-01T00:00\",\n            \"2023-03-01T01:00\",\n            \"2023-03-01T02:00\",\n            \"2023-03-01T03:00\",\n            \"2023-03-01T04:00\",\n            \"2023-03-01T05:00\",\n            \"2023-03-01T06:00\",\n            \"2023-03-01T07:00\",\n            \"2023-03-01T08:00\",\n            \"2023-03-01T09:00\",\n            \"2023-03-01T10:00\",\n            \"2023-03-01T11:00\",\n            \"2023-03-01T12:00\",\n            \"2023-03-01T13:00\",\n            \"2023-03-01T14:00\",\n            \"2023-03-01T15:00\",\n            \"2023-03-01T16:00\",\n            \"2023-03-01T17:00\",\n            \"2023-03-01T18:00\",\n            \"2023-03-01T19:00\",\n            \"2023-03-01T20:00\",\n            \"2023-03-01T21:00\",\n            \"2023-03-01T22:00\",\n            \"2023-03-01T23:00\",\n            \"2023-03-02T00:00\",\n            \"2023-03-02T01:00\",\n            \"2023-03-02T02:00\",\n            \"2023-03-02T03:00\",\n            \"2023-03-02T04:00\",\n            \"2023-03-02T05:00\",\n            \"2023-03-02T06:00\",\n            \"2023-03-02T07:00\",\n            \"2023-03-02T08:00\",\n            \"2023-03-02T09:00\",\n            \"2023-03-02T10:00\",\n            \"2023-03-02T11:00\",\n            \"2023-03-02T12:00\",\n            \"2023-03-02T13:00\",\n            \"2023-03-02T14:00\",\n            \"2023-03-02T15:00\",\n            \"2023-03-02T16:00\",\n            \"2023-03-02T17:00\",\n            \"2023-03-02T18:00\",\n            \"2023-03-02T19:00\",\n            \"2023-03-02T20:00\",\n            \"2023-03-02T21:00\",\n            \"2023-03-02T22:00\",\n            \"2023-03-02T23:00\"\n        ],\n        \"temperature_2m\": [\n            6.4,\n            6.1,\n            4.4,\n            3.8,\n            3.2,\n            2.7,\n            3,\n            3,\n            3.3,\n            3.8,\n            4.5,\n            4.8,\n            3.1,\n            2.7,\n            2.8,\n            2.6,\n            2.5,\n            2.3,\n            2.4,\n            2.5,\n            2.8,\n            3,\n            3,\n            3.1,\n            3.3,\n            2.9,\n            2.6,\n            2.2,\n            1.9,\n            1.9,\n            1.5,\n            1.4,\n            1.5,\n            1.7,\n            1.9,\n            2,\n            2,\n            1.6,\n            1.3,\n            1.4,\n            1.1,\n            0,\n            0,\n            -0.1,\n            -0.2,\n            -0.3,\n            -0.5,\n            -0.7,\n            -0.5,\n            -0.3,\n            -0.5,\n            -0.7,\n            -0.6,\n            -0.7,\n            -0.8,\n            -0.9,\n            -0.5,\n            0.6,\n            1.4,\n            2,\n            2.7,\n            3.4,\n            3.5,\n            3,\n            2.1,\n            1.3,\n            0.7,\n            0.4,\n            0.2,\n            0.1,\n            0,\n            -0.3,\n            -0.5,\n            -0.5,\n            -0.5,\n            -0.5,\n            -0.4,\n            -0.3,\n            -0.3,\n            -0.4,\n            0.2,\n            1.3,\n            2.2,\n            2.7,\n            3.5,\n            3.8,\n            4,\n            3.8,\n            3.3,\n            2.5,\n            1.5,\n            1.1,\n            0.8,\n            0.5,\n            0.2,\n            -0.1,\n            -0.4,\n            -0.6,\n            -0.8,\n            -1,\n            -1.3,\n            -1.7,\n            -1.9,\n            -1.7,\n            -1.4,\n            -0.6,\n            0.3,\n            1.4,\n            2.7,\n            3.3,\n            3.8,\n            3.9,\n            3.2,\n            2.2,\n            1,\n            0.5,\n            0.2,\n            -0.1,\n            -0.3,\n            -0.4,\n            -0.6,\n            -0.7,\n            -0.9,\n            -1.1,\n            -1.3,\n            -1.5,\n            -1.7,\n            -0.9,\n            -0.2,\n            1,\n            2.1,\n            3.4,\n            4.7,\n            5.1,\n            5.3,\n            5.1,\n            4.7,\n            3.9,\n            3,\n            2.6,\n            2.3,\n            1.9,\n            1.5,\n            1.1,\n            0.7,\n            0.5,\n            0.3,\n            0.2,\n            0,\n            -0.3,\n            -0.3,\n            0,\n            0.5,\n            1.4,\n            2.5,\n            3.8,\n            5.2,\n            5.8,\n            6.1,\n            6.2,\n            5.7,\n            5,\n            3.9,\n            3.1,\n            2.4,\n            1.6,\n            1.2,\n            1\n        ],\n        \"relativehumidity_2m\": [\n            89,\n            84,\n            68,\n            77,\n            76,\n            80,\n            79,\n            81,\n            77,\n            65,\n            60,\n            58,\n            84,\n            84,\n            80,\n            84,\n            86,\n            88,\n            89,\n            89,\n            88,\n            88,\n            88,\n            88,\n            84,\n            85,\n            86,\n            87,\n            89,\n            88,\n            91,\n            91,\n            88,\n            86,\n            81,\n            80,\n            80,\n            79,\n            81,\n            76,\n            74,\n            86,\n            86,\n            83,\n            82,\n            82,\n            83,\n            88,\n            87,\n            86,\n            86,\n            86,\n            85,\n            84,\n            85,\n            85,\n            82,\n            77,\n            67,\n            61,\n            56,\n            53,\n            52,\n            56,\n            55,\n            62,\n            63,\n            66,\n            69,\n            74,\n            77,\n            82,\n            85,\n            84,\n            83,\n            84,\n            84,\n            84,\n            85,\n            86,\n            84,\n            79,\n            69,\n            66,\n            60,\n            56,\n            53,\n            52,\n            56,\n            63,\n            71,\n            74,\n            75,\n            76,\n            77,\n            78,\n            79,\n            79,\n            80,\n            80,\n            81,\n            82,\n            82,\n            80,\n            78,\n            73,\n            68,\n            62,\n            54,\n            48,\n            43,\n            40,\n            45,\n            53,\n            64,\n            69,\n            72,\n            76,\n            78,\n            80,\n            80,\n            78,\n            76,\n            73,\n            74,\n            75,\n            77,\n            86,\n            84,\n            80,\n            76,\n            71,\n            65,\n            63,\n            61,\n            62,\n            66,\n            71,\n            78,\n            81,\n            83,\n            85,\n            87,\n            88,\n            90,\n            92,\n            93,\n            95,\n            96,\n            96,\n            95,\n            93,\n            90,\n            85,\n            79,\n            73,\n            66,\n            64,\n            63,\n            64,\n            67,\n            72,\n            78,\n            81,\n            83,\n            85,\n            86,\n            87\n        ],\n        \"windspeed_10m\": [\n            13.2,\n            14,\n            14.4,\n            13.9,\n            12.1,\n            8.3,\n            9.9,\n            11.3,\n            11.8,\n            14.2,\n            19,\n            18.6,\n            20.2,\n            17.4,\n            18.9,\n            18.4,\n            14.3,\n            15.8,\n            14.7,\n            13.7,\n            13.7,\n            16.6,\n            16.2,\n            16.5,\n            17.3,\n            17.3,\n            19.1,\n            21.3,\n            19.1,\n            17.5,\n            16.2,\n            15.8,\n            19.9,\n            16.6,\n            16.9,\n            16.9,\n            16.5,\n            17.7,\n            15.1,\n            14.3,\n            15.8,\n            13.4,\n            13.1,\n            13.1,\n            13,\n            12.4,\n            12.6,\n            11.2,\n            10.8,\n            10.5,\n            10.4,\n            10,\n            10.1,\n            10.4,\n            9.6,\n            8.5,\n            10.3,\n            11.5,\n            14.4,\n            13,\n            12.5,\n            14.5,\n            14.8,\n            14.8,\n            13,\n            9.8,\n            9,\n            6.1,\n            7.3,\n            7.9,\n            7.9,\n            5.8,\n            5.1,\n            5.9,\n            7.3,\n            6.8,\n            6.5,\n            6.9,\n            6.4,\n            6.8,\n            7.1,\n            8.3,\n            12.3,\n            12.5,\n            12.1,\n            13,\n            14.1,\n            14.1,\n            12.7,\n            10.2,\n            7.9,\n            7.4,\n            7.7,\n            7.9,\n            7.7,\n            7.4,\n            7.1,\n            7.1,\n            7.1,\n            7.1,\n            7.1,\n            7.3,\n            7.3,\n            7.6,\n            8.1,\n            8.7,\n            9.2,\n            9.2,\n            9.7,\n            10,\n            10.8,\n            10.8,\n            10.2,\n            8.8,\n            7.4,\n            6.7,\n            6.4,\n            6,\n            6,\n            5.7,\n            5.8,\n            6,\n            5.6,\n            5.8,\n            5.8,\n            5.3,\n            5.2,\n            4.4,\n            5,\n            6.3,\n            7.9,\n            9.5,\n            11.6,\n            11.9,\n            11.9,\n            11.3,\n            9.9,\n            8.6,\n            6.8,\n            6.7,\n            7,\n            7.6,\n            7.6,\n            7.6,\n            7.6,\n            7.6,\n            7.6,\n            7.6,\n            7.3,\n            7.4,\n            7.1,\n            7.3,\n            7.6,\n            7.9,\n            7.9,\n            8.3,\n            7.9,\n            7.6,\n            6.9,\n            6.2,\n            5.3,\n            4.6,\n            3.6,\n            3.2,\n            2.7,\n            2.2,\n            2.2,\n            2.6\n        ]\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Open-Meteo is an open-source weather API with free access for non-commercial use. No API key is required. You can use it immediately!\n\nLink: [https://open-meteo.com/](https://open-meteo.com/)"
+		},
+		{
+			"name": "10. The Met Collection API",
+			"item": [
+				{
+					"name": "Available art objects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://collectionapi.metmuseum.org/public/collection/v1/search?q=sunflowers",
+							"protocol": "https",
+							"host": [
+								"collectionapi",
+								"metmuseum",
+								"org"
+							],
+							"path": [
+								"public",
+								"collection",
+								"v1",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "sunflowers"
+								}
+							]
+						},
+						"description": "This request returns a listing of all Object IDs for objects that contain the search query within the object’s data\n\nLink: [https://metmuseum.github.io/#search](https://metmuseum.github.io/#search)"
+					},
+					"response": [
+						{
+							"name": "Available art objects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://collectionapi.metmuseum.org/public/collection/v1/search?q=sunflowers",
+									"protocol": "https",
+									"host": [
+										"collectionapi",
+										"metmuseum",
+										"org"
+									],
+									"path": [
+										"public",
+										"collection",
+										"v1",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "sunflowers"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ARR/3.0"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 14:53:54 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "incap_ses_490_1662004=nt0GNpL6rkSanQL1ONXMBoTP+GMAAAAAktw72TyGWoG7oe+pKRrJ/g==; path=/; Domain=.metmuseum.org"
+								},
+								{
+									"key": "X-CDN",
+									"value": "Imperva"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "X-Iinfo",
+									"value": "3-23009333-23009338 NNYY CT(5 14 0) RT(1677250436034 13) q(0 0 0 1) r(0 0) U12"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 89,\n    \"objectIDs\": [\n        436524,\n        484935,\n        437112,\n        210191,\n        431264,\n        397949,\n        656530,\n        480725,\n        486590,\n        485308,\n        375281,\n        705155,\n        11922,\n        2032,\n        343052,\n        20141,\n        347980,\n        2019,\n        208554,\n        403496,\n        360837,\n        437115,\n        207869,\n        400581,\n        423400,\n        707887,\n        223828,\n        682927,\n        57922,\n        649813,\n        79739,\n        193938,\n        339347,\n        208218,\n        437984,\n        202228,\n        436534,\n        761604,\n        437329,\n        436252,\n        363282,\n        207753,\n        822570,\n        816522,\n        487043,\n        436580,\n        437526,\n        203893,\n        367434,\n        190739,\n        423237,\n        262423,\n        839296,\n        367817,\n        822590,\n        822589,\n        13644,\n        18362,\n        820022,\n        648617,\n        761731,\n        814626,\n        892559,\n        207967,\n        626832,\n        262430,\n        262428,\n        841928,\n        707697,\n        205386,\n        262378,\n        426804,\n        633526,\n        369073,\n        747779,\n        852414,\n        427872,\n        895564,\n        436530,\n        436535,\n        436121,\n        436529,\n        724844,\n        436144,\n        437980,\n        631808,\n        834580,\n        834585,\n        834765\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "With this API you can access data on more than 470,000 artworks in the Metropolitan Museum of Art.\n\nLink: [https://metmuseum.github.io/](https://metmuseum.github.io/)"
+		}
+	]
+}
