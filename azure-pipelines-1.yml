@@ -13,19 +13,19 @@ variables:
   value: 'main'
 
 - name: FILE_NAME
-  value: 'OneProvider Public Collection.postman_collection.json'
+  value: 'List of 10 public free APIs for students.postman_collection (1).json'
 
 - name: SECURITY_SCAN_API
-  value: 'https://f747d6214b63.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://1fdb2a080b67.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://f747d6214b63.ngrok-free.app/v1/webHook'
+  value: 'https://1fdb2a080b67.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: '3aad03c0-6d0b-4035-b836-7d2f1cfbbf79'
+  value: '3515e298-d502-4109-a106-8d7201be33d1'
 
 - name: PROJECT_ID
-  value: '8de9e94f-2bf9-421a-97b1-4dcce6f25635'
+  value: '4bb8ae5b-f0f8-4653-b840-5a2256a081bd'
 
 - name: BLOCK_PIPELINE
   value: 'false'
