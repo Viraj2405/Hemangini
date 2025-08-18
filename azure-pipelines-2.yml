@@ -1,0 +1,109 @@
+
+	
+	pipeline {
+    agent any
+
+    environment {
+        
+        Bugdazz = credentials('API_SC_TOKEN')
+        REPO_URL       = "https://${Bugdazz}@github.com/Viraj2405/Hemangini"
+        BRANCH     = 'main'
+        FILE_NAME      = 'List of 10 public free APIs for students.postman_collection (1).json'
+        TEMP_DIR       = 'temp-repo'
+        SECURITY_SCAN_API = 'https://a5ccb75bb44e.ngrok-free.app/v1/startSecurityScan'
+        PROJECT_ID     = '450e881f-1c48-4557-a675-641203e3aa3a'
+        BLOCK_PIPELINE = 'false'
+        BLOCK_CRITICAL = 'true'
+        BLOCK_HIGH     = 'true'
+        BLOCK_MEDIUM   = 'true'
+        CRITICAL_THRESHOLD = 0
+        HIGH_THRESHOLD     = 0
+        MEDIUM_THRESHOLD   = 0
+        INTEGRATION_ID = '64b7c614-f170-43e5-8b73-3be66c81b7f9'
+        UPLOAD_API_URL = 'https://a5ccb75bb44e.ngrok-free.app/v1/webHook'
+    }
+
+    stages {
+        stage('Clone & Upload File') {
+            steps {
+                script {
+                    bat """
+                    git clone --branch %BRANCH% --depth 1 "%REPO_URL%" %TEMP_DIR%
+                    for /f "delims=" %%F in ('dir /s /b "%TEMP_DIR%\\%FILE_NAME%"') do (
+                        echo Found: %%F
+                        copy "%%F" "%WORKSPACE%\\%FILE_NAME%"
+                    )
+                    rmdir /s /q %TEMP_DIR%
+                    """
+
+                    if (!fileExists("${env.FILE_NAME}")) {
+                        error "File '${env.FILE_NAME}' not found after clone."
+                    }
+
+                    bat """
+                    curl --location "%UPLOAD_API_URL%" ^
+                    --form "file=@%FILE_NAME%" ^
+                    --form "project_id=%PROJECT_ID%"
+                    """
+                }
+            }
+        }
+
+        stage('Run Security Scan') {
+            steps {
+                script {
+                    def response = bat(
+                        script: """
+                        curl --silent --request POST "%SECURITY_SCAN_API%/%PROJECT_ID%" ^
+                        --header "Api-Key: %INTEGRATION_ID%"
+                        """,
+                        returnStdout: true
+                    ).trim()
+
+                    echo "Scan Response: ${response}"
+
+                    if (response.contains('"message":"token expired"')) {
+                        error "Token expired. Aborting pipeline."
+                    }
+
+                    def jsonLine = response.readLines().find { it.trim().startsWith('{') }
+					def json = new groovy.json.JsonSlurper().parseText(jsonLine)
+
+					def critical = json.criticalCount ?: 0
+					def high     = json.highCount ?: 0
+					def medium   = json.mediumCount ?: 0
+
+                    echo "Critical: ${critical}, High: ${high}, Medium: ${medium}"
+
+                    if (env.BLOCK_PIPELINE == 'true') {
+                        if (env.BLOCK_CRITICAL == 'true' && critical > (env.CRITICAL_THRESHOLD ?: '0').toInteger()) {
+                            error "Blocked: Critical findings exceed threshold."
+                        }
+                        if (env.BLOCK_HIGH == 'true' && high > (env.HIGH_THRESHOLD ?: '0').toInteger()) {
+                            error "Blocked: High findings exceed threshold."
+                        }
+                        if (env.BLOCK_MEDIUM == 'true' && medium > (env.MEDIUM_THRESHOLD ?: '0').toInteger()) {
+                            error "Blocked: Medium findings exceed threshold."
+                        }
+                        echo "No blocking issues. Continuing pipeline."
+                    } else {
+                        echo "Blocking is disabled."
+                    }
+                }
+            }
+        }
+
+        stage('Post-processing') {
+            steps {
+                echo "Post-processing complete."
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
+	
