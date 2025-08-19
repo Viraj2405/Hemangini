@@ -55,136 +55,143 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-  - task: PowerShell@2
-    displayName: 'Clone and Upload File'
-    inputs:
-      targetType: 'inline'
-      script: |
-        git clone --branch $(BRANCH) --depth 1 $(REPO_URL) temp-repo
+- task: PowerShell@2
+  displayName: 'Clone and Upload File'
+  inputs:
+    targetType: 'inline'
+    script: |
+      git clone --branch $(BRANCH) --depth 1 $(REPO_URL) temp-repo
 
-        $file = Get-ChildItem -Path temp-repo -Recurse -File -Filter "$(FILE_NAME)" | Select-Object -First 1
+      $file = Get-ChildItem -Path temp-repo -Recurse -File -Filter "$(FILE_NAME)" | Select-Object -First 1
 
-        if ($file) {
-          Write-Host "Found file: $($file.FullName)"
-          Copy-Item -Path $file.FullName -Destination "$(FILE_NAME)"
-          curl.exe --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
-        } else {
-          throw "File '$(FILE_NAME)' not found in repository."
+      if ($file) {
+        Write-Host "Found file: $($file.FullName)"
+        Copy-Item -Path $file.FullName -Destination "$(FILE_NAME)"
+        curl.exe --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
+      } else {
+        throw "File '$(FILE_NAME)' not found in repository."
+      }
+
+- task: PowerShell@2
+  displayName: 'Run Security Scan'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Starting Security Scan..."
+
+      $apiUrl = "$(SECURITY_SCAN_API)/$(PROJECT_ID)"
+      $headers = @(
+        "--header", "Content-Type: application/json",
+        "--header", "Api-Key: $(APPKEYTOKEN)"
+      )
+
+      $args = @(
+        "--location",
+        "--request", "POST",
+        $apiUrl
+      ) + $headers
+
+      $response = & curl.exe @args
+
+      Write-Host "Scan Response: $response"
+
+      if ($response -match '"message"\s*:\s*"token expired"') {
+        throw "Token expired. Blocking pipeline."
+      }
+
+      function Extract-Count {
+        param ($name)
+        if ($response -match '"' + $name + '"\s*:\s*(\d+)') {
+          return [int]$Matches[1]
         }
+        return 0
+      }
 
-  - task: PowerShell@2
-    displayName: 'Run Security Scan'
-    inputs:
-      targetType: 'inline'
-      script: |
-        Write-Host "Starting Security Scan..."
+      $critical = Extract-Count 'criticalCount'
+      $high     = Extract-Count 'highCount'
+      $medium   = Extract-Count 'mediumCount'
 
-        $apiUrl = "$(SECURITY_SCAN_API)/$(PROJECT_ID)"
-        $headers = @(
-          "--header", "Content-Type: application/json",
-          "--header", "Api-Key: $(APPKEYTOKEN)"
-        )
+      Write-Host "Severity Summary:"
+      Write-Host "Critical: $critical"
+      Write-Host "High: $high"
+      Write-Host "Medium: $medium"
 
-        $args = @(
-          "--location",
-          "--request", "POST",
-          $apiUrl
-        ) + $headers
+      # Export values as pipeline variables
+      Write-Host "##vso[task.setvariable variable=critical]$critical"
+      Write-Host "##vso[task.setvariable variable=high]$high"
+      Write-Host "##vso[task.setvariable variable=medium]$medium"
 
-        $response = & curl.exe @args
+      $criticalThreshold = [int]"$(CRITICAL_THRESHOLD)"
+      $highThreshold     = [int]"$(HIGH_THRESHOLD)"
+      $mediumThreshold   = [int]"$(MEDIUM_THRESHOLD)"
 
-        Write-Host "Scan Response: $response"
-
-        if ($response -match '"message"\s*:\s*"token expired"') {
-          throw "Token expired. Blocking pipeline."
+      if ("$(BLOCK_PIPELINE)" -eq 'true') {
+        if ("$(BLOCK_CRITICAL)" -eq 'true' -and $critical -gt $criticalThreshold) {
+          throw "Blocked due to critical vulnerabilities exceeding threshold."
         }
-
-        function Extract-Count {
-          param ($name)
-          if ($response -match '"' + $name + '"\s*:\s*(\d+)') {
-            return [int]$Matches[1]
-          }
-          return 0
+        if ("$(BLOCK_HIGH)" -eq 'true' -and $high -gt $highThreshold) {
+          throw "Blocked due to high vulnerabilities exceeding threshold."
         }
-
-        $critical = Extract-Count 'criticalCount'
-        $high     = Extract-Count 'highCount'
-        $medium   = Extract-Count 'mediumCount'
-
-        Write-Host "Severity Summary:"
-        Write-Host "Critical: $critical"
-        Write-Host "High: $high"
-        Write-Host "Medium: $medium"
-
-        # Export values as pipeline variables
-        Write-Host "##vso[task.setvariable variable=critical]$critical"
-        Write-Host "##vso[task.setvariable variable=high]$high"
-        Write-Host "##vso[task.setvariable variable=medium]$medium"
-
-        $criticalThreshold = [int]"$(CRITICAL_THRESHOLD)"
-        $highThreshold     = [int]"$(HIGH_THRESHOLD)"
-        $mediumThreshold   = [int]"$(MEDIUM_THRESHOLD)"
-
-        if ("$(BLOCK_PIPELINE)" -eq 'true') {
-          if ("$(BLOCK_CRITICAL)" -eq 'true' -and $critical -gt $criticalThreshold) {
-            throw "Blocked due to critical vulnerabilities exceeding threshold."
-          }
-          if ("$(BLOCK_HIGH)" -eq 'true' -and $high -gt $highThreshold) {
-            throw "Blocked due to high vulnerabilities exceeding threshold."
-          }
-          if ("$(BLOCK_MEDIUM)" -eq 'true' -and $medium -gt $mediumThreshold) {
-            throw "Blocked due to medium vulnerabilities exceeding threshold."
-          }
-          Write-Host "No blocking conditions met. Continuing pipeline."
-        } else {
-          Write-Host "Blocking disabled. Continuing regardless of findings."
+        if ("$(BLOCK_MEDIUM)" -eq 'true' -and $medium -gt $mediumThreshold) {
+          throw "Blocked due to medium vulnerabilities exceeding threshold."
         }
+        Write-Host "No blocking conditions met. Continuing pipeline."
+      } else {
+        Write-Host "Blocking disabled. Continuing regardless of findings."
+      }
 
-  - task: PowerShell@2
-    displayName: 'Generate Vulnerability PDF Report'
-    condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
-    inputs:
-      targetType: 'inline'
-      script: |
-        Write-Host "Requesting PDF report from API..."
+- task: PowerShell@2
+  displayName: 'Generate Vulnerability PDF Report'
+  condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Requesting PDF report from API..."
 
-        $reportApi = "$(REPORT_API)"
-        $headers = @(
-          "--header", "Content-Type: application/json",
-          "--header", "Api-Key: $(APPKEYTOKEN)"
-        )
+      $reportApi = "$(REPORT_API)"
+      $headers = @(
+        "--header", "Content-Type: application/json",
+        "--header", "Api-Key: $(APPKEYTOKEN)"
+      )
 
-        $jsonBody = "{ ""project_id"": ""$(PROJECT_ID)"" }"
+      $body = @{
+        project_id = "$(PROJECT_ID)"
+      } | ConvertTo-Json -Compress
 
-        $args = @(
-          "--location",
-          "--request", "POST",
-          "--data", $jsonBody,
-          $reportApi
-        ) + $headers
+      $args = @(
+        "--location",
+        "--request", "POST",
+        "--data-raw", $body,
+        $reportApi
+      ) + $headers
 
-        $response = & curl.exe @args
-        Write-Host "Report API Response: $response"
+      $response = & curl.exe @args
+      Write-Host "Report API Response: $response"
 
+      try {
         $json = $response | ConvertFrom-Json
-        $pdfBase64 = $json.pdf  # adjust to actual key returned by API
+      } catch {
+        throw "API did not return valid JSON. Response was: $response"
+      }
 
-        if (-not $pdfBase64) {
-          throw "Failed to extract PDF from response"
-        }
+      $pdfBase64 = $json.pdf
 
-        $bytes = [System.Convert]::FromBase64String($pdfBase64)
-        [System.IO.File]::WriteAllBytes("report.pdf", $bytes)
+      if (-not $pdfBase64) {
+        throw "Failed to extract PDF from response"
+      }
 
-        Write-Host "PDF report saved as report.pdf"
+      $bytes = [System.Convert]::FromBase64String($pdfBase64)
+      [System.IO.File]::WriteAllBytes("report.pdf", $bytes)
 
-  - task: PublishPipelineArtifact@1
-    displayName: 'Publish Vulnerability Report'
-    condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
-    inputs:
-      targetPath: '$(System.DefaultWorkingDirectory)/report.pdf'
-      artifact: 'VulnerabilityReport'
-      publishLocation: 'pipeline'
+      Write-Host "PDF report saved as report.pdf"
 
-  - script: echo "Post-processing complete."
-    displayName: 'Post-processing'
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Vulnerability Report'
+  condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/report.pdf'
+    artifact: 'VulnerabilityReport'
+    publishLocation: 'pipeline'
+
+- script: echo "Post-processing complete."
+  displayName: 'Post-processing'
