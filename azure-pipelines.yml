@@ -16,10 +16,10 @@ variables:
   value: 'Freebees Public API.postman_collection.json'
 
 - name: SECURITY_SCAN_API
-  value: 'https://75b4ed4da038.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://720c251b5d25.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://75b4ed4da038.ngrok-free.app/v1/webHook'
+  value: 'https://720c251b5d25.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
   value: '340afa11-6a11-43a0-87c9-840f48bf9f69'
