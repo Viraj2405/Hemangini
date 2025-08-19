@@ -154,6 +154,7 @@ steps:
         "--header", "Api-Key: $(APPKEYTOKEN)"
       )
 
+      # Proper JSON body
       $body = '{"project_id": "' + "$(PROJECT_ID)" + '"}'
 
       Write-Host "JSON Body being sent: $body"
@@ -161,7 +162,7 @@ steps:
       $args = @(
         "--location",
         "--request", "POST",
-        "--data", $body,
+        "--data-raw", $body,
         $reportApi
       ) + $headers
 
