@@ -16,10 +16,13 @@ variables:
   value: 'Haircut Store API NEW.json'
 
 - name: SECURITY_SCAN_API
-  value: 'https://f48cdcaddad9.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://720c251b5d25.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://f48cdcaddad9.ngrok-free.app/v1/webHook'
+  value: 'https://720c251b5d25.ngrok-free.app/v1/webHook'
+
+- name: REPORT_API
+  value: 'https://720c251b5d25.ngrok-free.app/v1/downloadPdf'
 
 - name: APPKEYTOKEN
   value: '58743e3e-55ea-4e71-98e5-b05f06a280b0'
@@ -47,7 +50,6 @@ variables:
 
 - name: MEDIUM_THRESHOLD
   value: '0'
-
 
 pool:
   vmImage: 'windows-latest'
@@ -114,6 +116,11 @@ steps:
         Write-Host "High: $high"
         Write-Host "Medium: $medium"
 
+        # Export values as pipeline variables
+        Write-Host "##vso[task.setvariable variable=critical]$critical"
+        Write-Host "##vso[task.setvariable variable=high]$high"
+        Write-Host "##vso[task.setvariable variable=medium]$medium"
+
         $criticalThreshold = [int]"$(CRITICAL_THRESHOLD)"
         $highThreshold     = [int]"$(HIGH_THRESHOLD)"
         $mediumThreshold   = [int]"$(MEDIUM_THRESHOLD)"
@@ -132,6 +139,7 @@ steps:
         } else {
           Write-Host "Blocking disabled. Continuing regardless of findings."
         }
+
   - task: PowerShell@2
     displayName: 'Generate Vulnerability PDF Report'
     condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
@@ -140,17 +148,14 @@ steps:
       script: |
         Write-Host "Requesting PDF report from API..."
 
-        $reportApi = "$(Host)v1/downloadPdf"
+        $reportApi = "$(REPORT_API)"
         $headers = @(
           "--header", "Content-Type: application/json",
           "--header", "Api-Key: $(APPKEYTOKEN)"
         )
 
-        # Build JSON body safely
-        $body = @{ project_id = "$(PROJECT_ID)" }
-        $jsonBody = $body | ConvertTo-Json -Compress
+        $jsonBody = "{ ""project_id"": ""$(PROJECT_ID)"" }"
 
-        # Call API
         $args = @(
           "--location",
           "--request", "POST",
@@ -159,17 +164,15 @@ steps:
         ) + $headers
 
         $response = & curl.exe @args
-
         Write-Host "Report API Response: $response"
 
-        # Parse Base64 PDF string from JSON response
-        $pdfBase64 = $response | ConvertFrom-Json
+        $json = $response | ConvertFrom-Json
+        $pdfBase64 = $json.pdf  # adjust to actual key returned by API
 
         if (-not $pdfBase64) {
           throw "Failed to extract PDF from response"
         }
 
-        # Decode Base64 -> PDF file
         $bytes = [System.Convert]::FromBase64String($pdfBase64)
         [System.IO.File]::WriteAllBytes("report.pdf", $bytes)
 
