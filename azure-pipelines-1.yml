@@ -158,14 +158,8 @@ steps:
 
       Write-Host "Sending JSON body: $body"
 
-      $response = Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body
-
-      if (-not $response.pdf) {
-        throw "Failed to get PDF in response. Full response: $($response | ConvertTo-Json -Depth 5)"
-      }
-
-      $bytes = [System.Convert]::FromBase64String($response.pdf)
-      [System.IO.File]::WriteAllBytes("report.pdf", $bytes)
+      # Save raw PDF directly
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "report.pdf"
 
       Write-Host "PDF report saved as report.pdf"
 
