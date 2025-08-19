@@ -148,7 +148,7 @@ steps:
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/report.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/report1.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
