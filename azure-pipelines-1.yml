@@ -154,14 +154,16 @@ steps:
         "--header", "Api-Key: $(APPKEYTOKEN)"
       )
 
-      $body = @{
-        project_id = "$(PROJECT_ID)"
-      } | ConvertTo-Json -Compress
+      $body = @"
+      {
+        "project_id": "$(PROJECT_ID)"
+      }
+      "@
 
       $args = @(
         "--location",
         "--request", "POST",
-        "--data-raw", $body,
+        "--data", $body,
         $reportApi
       ) + $headers
 
