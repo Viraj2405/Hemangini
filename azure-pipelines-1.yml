@@ -146,42 +146,25 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host "Requesting PDF report from API..."
-
-      $reportApi = "$(REPORT_API)"
-      $headers = @(
-        "--header", "Content-Type: application/json",
-        "--header", "Api-Key: $(APPKEYTOKEN)"
-      )
-
-      # Proper JSON body
-      $body = '{"project_id": "' + "$(PROJECT_ID)" + '"}'
-
-      Write-Host "JSON Body being sent: $body"
-
-      $args = @(
-        "--location",
-        "--request", "POST",
-        "--data-raw", $body,
-        $reportApi
-      ) + $headers
-
-      $response = & curl.exe @args
-      Write-Host "Report API Response: $response"
-
-      try {
-        $json = $response | ConvertFrom-Json
-      } catch {
-        throw "API did not return valid JSON. Response was: $response"
+      $reportApi = "$(REPORT_API)"   # e.g. https://720c251b5d25.ngrok-free.app/v1/downloadPdf
+      $headers = @{
+        "Content-Type" = "application/json"
+        "Api-Key"      = "$(APPKEYTOKEN)"
       }
 
-      $pdfBase64 = $json.pdf
+      $body = @{
+        project_id = "$(PROJECT_ID)"
+      } | ConvertTo-Json
 
-      if (-not $pdfBase64) {
-        throw "Failed to extract PDF from response"
+      Write-Host "Sending JSON body: $body"
+
+      $response = Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body
+
+      if (-not $response.pdf) {
+        throw "Failed to get PDF in response. Full response: $($response | ConvertTo-Json -Depth 5)"
       }
 
-      $bytes = [System.Convert]::FromBase64String($pdfBase64)
+      $bytes = [System.Convert]::FromBase64String($response.pdf)
       [System.IO.File]::WriteAllBytes("report.pdf", $bytes)
 
       Write-Host "PDF report saved as report.pdf"
