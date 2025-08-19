@@ -154,11 +154,9 @@ steps:
         "--header", "Api-Key: $(APPKEYTOKEN)"
       )
 
-      $body = @"
-      {
-        "project_id": "$(PROJECT_ID)"
-      }
-      "@
+      $body = '{"project_id": "' + "$(PROJECT_ID)" + '"}'
+
+      Write-Host "JSON Body being sent: $body"
 
       $args = @(
         "--location",
