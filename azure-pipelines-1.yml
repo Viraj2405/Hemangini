@@ -7,25 +7,25 @@ variables:
 - group: "BugDazz"
 
 - name: REPO_URL
-  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Hemangini"
+  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Webhook"
 
 - name: BRANCH
   value: 'main'
 
 - name: FILE_NAME
-  value: 'List of 10 public free APIs for students.postman_collection (1).json'
+  value: 'Haircut Store API NEW.json'
 
 - name: SECURITY_SCAN_API
-  value: 'https://1fdb2a080b67.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://f48cdcaddad9.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://1fdb2a080b67.ngrok-free.app/v1/webHook'
+  value: 'https://f48cdcaddad9.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: '3515e298-d502-4109-a106-8d7201be33d1'
+  value: '58743e3e-55ea-4e71-98e5-b05f06a280b0'
 
 - name: PROJECT_ID
-  value: '4bb8ae5b-f0f8-4653-b840-5a2256a081bd'
+  value: '550c0e7f-beed-4ea9-bf93-cfebed877ffb'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -132,6 +132,56 @@ steps:
         } else {
           Write-Host "Blocking disabled. Continuing regardless of findings."
         }
+  - task: PowerShell@2
+    displayName: 'Generate Vulnerability PDF Report'
+    condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host "Requesting PDF report from API..."
+
+        $reportApi = "$(Host)v1/downloadPdf"
+        $headers = @(
+          "--header", "Content-Type: application/json",
+          "--header", "Api-Key: $(APPKEYTOKEN)"
+        )
+
+        # Build JSON body safely
+        $body = @{ project_id = "$(PROJECT_ID)" }
+        $jsonBody = $body | ConvertTo-Json -Compress
+
+        # Call API
+        $args = @(
+          "--location",
+          "--request", "POST",
+          "--data", $jsonBody,
+          $reportApi
+        ) + $headers
+
+        $response = & curl.exe @args
+
+        Write-Host "Report API Response: $response"
+
+        # Parse Base64 PDF string from JSON response
+        $pdfBase64 = $response | ConvertFrom-Json
+
+        if (-not $pdfBase64) {
+          throw "Failed to extract PDF from response"
+        }
+
+        # Decode Base64 -> PDF file
+        $bytes = [System.Convert]::FromBase64String($pdfBase64)
+        [System.IO.File]::WriteAllBytes("report.pdf", $bytes)
+
+        Write-Host "PDF report saved as report.pdf"
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Vulnerability Report'
+    condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
+    inputs:
+      targetPath: '$(System.DefaultWorkingDirectory)/report.pdf'
+      artifact: 'VulnerabilityReport'
+      publishLocation: 'pipeline'
 
   - script: echo "Post-processing complete."
     displayName: 'Post-processing'
