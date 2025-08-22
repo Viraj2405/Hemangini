@@ -28,7 +28,7 @@ variables:
   value: 'https://82e696db61ba.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: '130b9bf0-cefe-4642-8fc3-045eb921bdda'
+  value: 'a2910a6b-9297-4e49-8bfb-5192939517a7'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -141,14 +141,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "Haircut Store API Copy_20250822_182030.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "Haircut Store API Copy 3_20250822_183434.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/Haircut Store API Copy_20250822_182030.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/Haircut Store API Copy 3_20250822_183434.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
