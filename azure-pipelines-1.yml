@@ -7,28 +7,28 @@ variables:
 - group: "BugDazz"
 
 - name: REPO_URL
-  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Hemangini"
+  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Marathe"
 
 - name: BRANCH
   value: 'main'
 
 - name: FILE_NAME
-  value: 'Haircut Store API-06-09-2024.json'
+  value: 'OneProvider.json'
 
 - name: SECURITY_SCAN_API
-  value: 'https://023259e44967.ngrok-free.app/v1/startSecurityScan'
+  value: 'http://apiscanner.bugdazz.com/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://023259e44967.ngrok-free.app/v1/webHook'
+  value: 'http://apiscanner.bugdazz.com/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: 'd4d00caa-bd4a-4525-a4d1-8887c9d7fc02'
+  value: '06774dd3-840d-4ad8-8a9d-90f67fdece18'
 
 - name: REPORT_API
-  value: 'https://023259e44967.ngrok-free.app/v1/integrationPdf'
+  value: 'http://apiscanner.bugdazz.com/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: '01d2ef2e-e316-4d4c-8ca9-033fc62094ef'
+  value: '87925b6e-7863-4ac0-9fba-8519cbad64c5'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -43,13 +43,13 @@ variables:
   value: 'true'
 
 - name: CRITICAL_THRESHOLD
-  value: '0'
+  value: ''
 
 - name: HIGH_THRESHOLD
-  value: '0'
+  value: ''
 
 - name: MEDIUM_THRESHOLD
-  value: '0'
+  value: ''
 
 pool:
   vmImage: 'windows-latest'
@@ -79,7 +79,8 @@ steps:
       $apiUrl = "$(SECURITY_SCAN_API)/$(PROJECT_ID)"
       $headers = @(
         "--header", "Content-Type: application/json",
-        "--header", "Api-Key: $(APPKEYTOKEN)"
+        "--header", "Api-Key: $(APPKEYTOKEN)",
+        "--header", "Content-Length: 0"
       )
       $args = @(
         "--location",
@@ -141,14 +142,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "Haircut Store API_20250822_225341.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250901_171619.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/Haircut Store API_20250822_225341.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250901_171619.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
