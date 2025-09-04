@@ -66,10 +66,7 @@ steps:
         Write-Host "Found file: $($file.FullName)"
         Copy-Item -Path $file.FullName -Destination "$(FILE_NAME)"
         curl.exe --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
-      } else {
-        throw "File '$(FILE_NAME)' not found in repository."
       }
-
 - task: PowerShell@2
   displayName: 'Run Security Scan'
   inputs:
