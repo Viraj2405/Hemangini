@@ -22,7 +22,7 @@ variables:
   value: 'https://e7389d8608ad.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: '641ec641-9a68-4f18-9b7a-8ca060dea0e4'
+  value: 'ee6299e4-00ca-4785-9a50-3c896348b459'
 
 - name: REPORT_API
   value: 'https://e7389d8608ad.ngrok-free.app/v1/integrationPdf'
