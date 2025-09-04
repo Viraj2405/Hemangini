@@ -7,13 +7,13 @@ variables:
 - group: "BugDazz"
 
 - name: REPO_URL
-  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Marathe"
+  value: ""
 
 - name: BRANCH
-  value: 'main'
+  value: ''
 
 - name: FILE_NAME
-  value: 'OneProvider.json'
+  value: ''
 
 - name: SECURITY_SCAN_API
   value: 'https://e7389d8608ad.ngrok-free.app/v1/startSecurityScan'
