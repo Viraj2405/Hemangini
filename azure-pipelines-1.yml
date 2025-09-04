@@ -16,19 +16,19 @@ variables:
   value: 'OneProvider.json'
 
 - name: SECURITY_SCAN_API
-  value: 'http://apiscanner.bugdazz.com/v1/startSecurityScan'
+  value: 'https://82e696db61ba.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'http://apiscanner.bugdazz.com/v1/webHook'
+  value: 'https://82e696db61ba.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: '06774dd3-840d-4ad8-8a9d-90f67fdece18'
+  value: '641ec641-9a68-4f18-9b7a-8ca060dea0e4'
 
 - name: REPORT_API
-  value: 'http://apiscanner.bugdazz.com/v1/integrationPdf'
+  value: 'https://82e696db61ba.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: '87925b6e-7863-4ac0-9fba-8519cbad64c5'
+  value: 'a2910a6b-9297-4e49-8bfb-5192939517a7'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -43,13 +43,13 @@ variables:
   value: 'true'
 
 - name: CRITICAL_THRESHOLD
-  value: ''
+  value: '0'
 
 - name: HIGH_THRESHOLD
-  value: ''
+  value: '0'
 
 - name: MEDIUM_THRESHOLD
-  value: ''
+  value: '0'
 
 pool:
   vmImage: 'windows-latest'
@@ -142,14 +142,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250901_171619.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "OneProvider Public Collection_20250904_095045.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/_20250901_171619.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/OneProvider Public Collection_20250904_095045.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
