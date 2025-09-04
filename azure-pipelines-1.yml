@@ -60,6 +60,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      if (-not "$(REPO_URL)" -or -not "$(FILE_NAME)") {
+      Write-Host "Skipping clone step: REPO_URL or FILE_NAME not provided."
+      exit 0
+      }
+
       git clone --branch $(BRANCH) --depth 1 $(REPO_URL) temp-repo
       $file = Get-ChildItem -Path temp-repo -Recurse -File -Filter "$(FILE_NAME)" | Select-Object -First 1
       if ($file) {
