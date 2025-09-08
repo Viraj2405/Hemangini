@@ -7,7 +7,7 @@ variables:
 - group: "BugDazz"
 
 - name: REPO_URL
-  value: ""
+  value: "https://$(API_SC_TOKEN)@"
 
 - name: BRANCH
   value: ''
@@ -16,22 +16,22 @@ variables:
   value: ''
 
 - name: SECURITY_SCAN_API
-  value: 'https://e7389d8608ad.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://e90d1be3080b.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://e7389d8608ad.ngrok-free.app/v1/webHook'
+  value: 'https://e90d1be3080b.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: 'ee6299e4-00ca-4785-9a50-3c896348b459'
+  value: '8248f5c7-99b9-4fb9-a5c3-4f30a4326d85'
 
 - name: REPORT_API
-  value: 'https://e7389d8608ad.ngrok-free.app/v1/integrationPdf'
+  value: 'https://e90d1be3080b.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: 'a2910a6b-9297-4e49-8bfb-5192939517a7'
+  value: ''
 
 - name: BLOCK_PIPELINE
-  value: 'false'
+  value: 'true'
 
 - name: BLOCK_CRITICAL
   value: 'true'
@@ -43,13 +43,13 @@ variables:
   value: 'true'
 
 - name: CRITICAL_THRESHOLD
-  value: '0'
+  value: ''
 
 - name: HIGH_THRESHOLD
-  value: '0'
+  value: ''
 
 - name: MEDIUM_THRESHOLD
-  value: '0'
+  value: ''
 
 pool:
   vmImage: 'windows-latest'
@@ -60,18 +60,20 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      if (-not "$(REPO_URL)" -or -not "$(FILE_NAME)") {
+      if (-not "$(REPO_URL)" -or -not "$(FILE_NAME)" -or -not "$(BRANCH)") {
       Write-Host "Skipping clone step: REPO_URL or FILE_NAME not provided."
       exit 0
       }
-
       git clone --branch $(BRANCH) --depth 1 $(REPO_URL) temp-repo
       $file = Get-ChildItem -Path temp-repo -Recurse -File -Filter "$(FILE_NAME)" | Select-Object -First 1
       if ($file) {
         Write-Host "Found file: $($file.FullName)"
         Copy-Item -Path $file.FullName -Destination "$(FILE_NAME)"
         curl.exe --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
+      } else {
+        throw "File '$(FILE_NAME)' not found in repository."
       }
+
 - task: PowerShell@2
   displayName: 'Run Security Scan'
   inputs:
@@ -141,17 +143,17 @@ steps:
         "Api-Key"      = "$(APPKEYTOKEN)"
       }
       $body = @{
-        project_id = "$(PROJECT_ID)"
+        project_id = "bc519e90-0bc3-44b3-b26f-f5fa91e7dd86"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "OneProvider Public Collection_20250904_095359.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250908_153155.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/OneProvider Public Collection_20250904_095359.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250908_153155.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
