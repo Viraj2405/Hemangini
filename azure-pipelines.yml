@@ -146,14 +146,14 @@ steps:
         project_id = "b19cf4d3-c0ff-48c5-9d05-1ae179c732ab"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250908_173426.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250908_175739.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/_20250908_173426.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250908_175739.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
