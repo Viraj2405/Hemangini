@@ -7,13 +7,13 @@ variables:
 - group: "BugDazz"
 
 - name: REPO_URL
-  value: "https://$(API_SC_TOKEN)@"
+  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Hemangini"
 
 - name: BRANCH
-  value: ''
+  value: 'main'
 
 - name: FILE_NAME
-  value: ''
+  value: 'Freebees Public API.postman_collection.json'
 
 - name: SECURITY_SCAN_API
   value: 'https://9ffeda364339.ngrok-free.app/v1/startSecurityScan'
@@ -28,7 +28,7 @@ variables:
   value: 'https://9ffeda364339.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: '2067ed76-a963-45c6-be7f-bb07a61e4754'
+  value: 'bc519e90-0bc3-44b3-b26f-f5fa91e7dd86'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -146,14 +146,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250910_113330.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250910_162011.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/_20250910_113330.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250910_162011.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
