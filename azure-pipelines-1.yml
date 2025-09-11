@@ -69,7 +69,7 @@ steps:
       if ($file) {
         Write-Host "Found file: $($file.FullName)"
         Copy-Item -Path $file.FullName -Destination "$(FILE_NAME)"
-        curl.exe --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
+        curl.exe --insecure --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
       } else {
         throw "File '$(FILE_NAME)' not found in repository."
       }
@@ -87,6 +87,7 @@ steps:
         "--header", "Content-Length: 0"
       )
       $args = @(
+        "--insecure",
         "--location",
         "--request", "POST",
         $apiUrl
@@ -146,6 +147,7 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
+      [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { return $true }
       Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250911_162127.pdf"
       Write-Host "PDF report saved as report.pdf"
 
