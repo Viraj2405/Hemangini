@@ -16,19 +16,19 @@ variables:
   value: ''
 
 - name: SECURITY_SCAN_API
-  value: 'https://9ffeda364339.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://apiscanner.bugdazz.com/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://9ffeda364339.ngrok-free.app/v1/webHook'
+  value: 'https://apiscanner.bugdazz.com/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: '8248f5c7-99b9-4fb9-a5c3-4f30a4326d85'
+  value: 'b115f598-a123-4b36-9d2a-c239c810884e'
 
 - name: REPORT_API
-  value: 'https://9ffeda364339.ngrok-free.app/v1/integrationPdf'
+  value: 'https://apiscanner.bugdazz.com/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: 'a543fc78-e703-418d-a4c6-782a238139af'
+  value: ''
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -146,14 +146,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250910_175627.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250911_162127.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/_20250910_175627.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250911_162127.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
