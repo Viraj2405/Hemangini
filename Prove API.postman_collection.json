@@ -1,0 +1,732 @@
+{
+	"info": {
+		"_postman_id": "894dfff1-97ba-4f75-bd7f-ecaad30fcd18",
+		"name": "Prove API",
+		"description": "## Prove API Postman Collection\n\nThis is a postman collection covering the Prove API. See [https://developer.prove.com/](https://developer.prove.com/) for more details.\n\n## Prerequisites\n\n[Postman](https://www.getpostman.com/downloads/)\n\n[Prove Account](https://portal.prove.com/en/signup)\n\n## Getting Started\n\nTo get started fork the collection from [Prove's public workspace](https://www.postman.com/) within Postman.\n\n<img src=\"https://content.pstmn.io/dd162572-2d43-4cbd-980c-2b96125bf463/aW1hZ2UucG5n\" width=\"236\" height=\"277\">\n\nEnter a name for your fork and select the workspace where it will be created:\n\n<img src=\"https://content.pstmn.io/c20f75c4-9b2e-4984-8cd5-acb468fd2b04/aW1hZ2UucG5n\" width=\"236\" height=\"324\">\n\nYou can also fork the environment template from the Prove Developers Workspace:\n\n<img src=\"https://content.pstmn.io/6c9f85c5-e6ef-4b20-a0c5-35490e039aac/aW1hZ2UucG5n\" width=\"234\" height=\"400\">\n\n### Set your API key\n\nTo run requests you'll need to supply your [API key](https://portal.prove.com/en/signup) and set it as an [environment variable](https://learning.postman.com/docs/sending-requests/variables/) within your workspace.\n\nAdd your secret key as a variable to the environment and save:\n\n<img src=\"https://content.pstmn.io/a4b26042-2c2c-4979-9d78-f2575153bff9/aW1hZ2UucG5n\" width=\"616\" height=\"324\">\n\nSet the environment to active:\n\n<img src=\"https://content.pstmn.io/12ef4f9b-57e2-45b6-a8f5-8c4e5c7277d7/aW1hZ2UucG5n\" width=\"252\" height=\"214\">\n\nNow within the collection set it to use the environment you just created:\n\n<img src=\"https://content.pstmn.io/dd420962-9641-44b1-8bc8-786ec5d0a0f0/aW1hZ2UucG5n\" width=\"244\" height=\"231\">\n\nIf your environment is set up correctly, you should be able to generate new access token in Authorization tab.\n\n<img src=\"https://content.pstmn.io/aa042760-2ec3-483a-acca-a5dcee1f246e/aW1hZ2UucG5n\" width=\"482\" height=\"663\">\n\n## Get credentials\n\nTo generate your sandbox credentials, follow these steps:\n\n1. Login to the [Portal](https://portal.prove.com/en/login).\n    \n2. Navigate to the **Pre-Fill** page. It can be selected from the left-side navigation.\n    \n    <img src=\"https://files.readme.io/3e3f280-image.png\">\n    \n3. Create a project and by clicking on **New Project**.\n    \n    <img src=\"https://files.readme.io/88f97b9-image.png\">\n    \n4. Click on the newly created project name. Next, click on Settings at the top right of the flow screen. Finally, click on the Credentials tab to view the credentials.\n    \n\n<img src=\"https://files.readme.io/ea16b1a-Screenshot_2024-06-14_at_3.10.09_PM.png\">\n\n## Manual testing\n\nThis postman collection allows you to run through the Pre-Fill flow in this order:\n\n- /v3/start\n    \n- /v3/validate\n    \n- /v3/challenge\n    \n- /v3/complete\n    \n- /v3/unify\n    \n- /v3/unify-status\n    \n- /v3/unify-bind\n    \n\nYou should be able to receive a success=true in the response bodies for each of the endpoints if you call them in order.\n\nWe've pre-set variables for Sandbox Milo Pinson so you can test the Prove Pre-Fill flow without using a client side SDK and only using the server side endpoints. See other test users on [Sandbox testing page](https://developer.prove.com/docs/prove-pre-fill-sandbox-testing#prove-pre-fill-test-users).\n\nWhen testing Unify endpoints (/v3/unify, /v3/unify-status, and /v3/unify-bind), please make sure to use the \"Prove Sandbox Unify with Barbaraanne Canet\" environment as it contains necessary environment variables for Unify testing.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759",
+		"_collection_link": "https://www.postman.com/prove-eng/prove-link-api-testing/collection/93r30p4/prove-api?action=share&source=collection_link&creator=23236759"
+	},
+	"item": [
+		{
+			"name": "/token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{CLIENT_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{CLIENT_SECRET}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/token",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/start",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"correlationId\", jsonData.correlationId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"flowType\": \"{{flowType}}\",\n  \"phoneNumber\": \"{{phoneNumber}}\",\n  \"finalTargetUrl\": \"{{finalTargetUrl}}\",\n  \"dob\": \"{{dob}}\",\n  \"emailAddress\": \"{{emailAddress}}\",\n  \"ssn\": \"{{ssn}}\",\n  \"smsMessage\": \"{{smsMessage}}\",\n  \"ipAddress\": \"{{ipAddress}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/start",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/validate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"correlationId\":\"{{correlationId}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/validate",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/challenge",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"correlationId\": \"{{correlationId}}\",\n  \"dob\": \"{{dob}}\",\n  \"ssn\": \"{{ssn}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/challenge",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"challenge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/complete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"correlationId\": \"{{correlationId}}\",\n  \"individual\": {\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"addresses\": [\n      {\n        \"address\": \"{{address}}\",\n        \"city\": \"{{city}}\",\n        \"region\": \"{{region}}\",\n        \"postalCode\": \"{{postalCode}}\"\n      }\n    ],\n    \"emailAddresses\": [\n      \"{{emailAddress}}\"\n    ],\n    \"ssn\": \"{{ssn}}\",\n    \"dob\": \"{{dob}}\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/complete",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Addy\",\n    \"lastName\": \"Epinay\",\n    \"possessionType\": \"mobile\",\n    \"phoneNumber\": \"2001004010\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/verify",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/verify-status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correlationId\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/verify-status",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"verify-status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/unify",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"correlationId\", jsonData.correlationId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"possessionType\": \"{{possessionType}}\",\n  \"phoneNumber\": \"{{phoneNumber}}\",\n  \"finalTargetUrl\": \"{{finalTargetUrl}}\",\n  \"smsMessage\": \"{{smsMessage}}\",\n  \"ipAddress\": \"{{ipAddress}}\",\n  \"clientCustomerId\": \"{{clientCustomerId}}\",\n  \"clientRequestId\": \"{{clientRequestId}}\",\n  \"email\": \"{{email}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/unify",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"unify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/unify-status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"correlationId\":\"{{correlationId}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/unify-status",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"unify-status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/unify-bind",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"correlationId\":\"{{correlationId}}\",\n    \"phoneNumber\": \"{{phoneNumber}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/unify-bind",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"unify-bind"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"IDENTITY_ID\", jsonData.identityId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (!pm.environment.get(\"clientRequestId\")) {",
+							"    var newId = crypto.randomUUID();",
+							"    pm.environment.set(\"clientRequestId\", newId);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phoneNumber\": \"{{phoneNumber}}\",\n    \"clientCustomerId\": \"{{clientCustomerId}}\",\n    \"deviceId\": \"{{deviceId}}\",\n    \"clientRequestId\": \"{{clientRequestId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity/batch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientRequestId\": \"{{clientRequestId}}\",\n    \"items\": [\n        {\n            \"phoneNumber\": \"{{phoneNumber}}\",\n            \"clientCustomerId\": \"{{clientCustomerId}}\",\n            \"deviceId\": \"{{deviceId}}\",\n            \"clientRequestId\": \"{{clientRequestId}}\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/batch",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"batch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity/activate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientRequestId\": \"{{clientRequestId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/{{IDENTITY_ID}}/activate",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"{{IDENTITY_ID}}",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity/deactivate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientRequestId\": \"{{clientRequestId}}\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/{{IDENTITY_ID}}/deactivate",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"{{IDENTITY_ID}}",
+						"deactivate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/{{IDENTITY_ID}}",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"{{IDENTITY_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/{{IDENTITY_ID}}",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"{{IDENTITY_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity Batch",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity/lookup",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/{{phoneNumber}}/lookup",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"{{phoneNumber}}",
+						"lookup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity/:identity_id/resolve",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identityId\": \"{{identityId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/{{IDENTITY_ID}}/resolve",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"{{IDENTITY_ID}}",
+						"resolve"
+					]
+				},
+				"description": "`/v3/identity/resolve` is given a few pieces of information about a customer and returns basic information like first name, last name, and phone number. An identityId is required. **This will only lookup an identity in the same domain - not for linked domains.**"
+			},
+			"response": []
+		},
+		{
+			"name": "/v3/identity/:identity_id/cross-domain",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identityId\": \"{{identityId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_BASE_URL}}/v3/identity/{{IDENTITY_ID}}/cross-domain",
+					"host": [
+						"{{API_BASE_URL}}"
+					],
+					"path": [
+						"v3",
+						"identity",
+						"{{IDENTITY_ID}}",
+						"cross-domain"
+					]
+				},
+				"description": "`/v3/identity/cross-domain` is given an identityId and returns a list of objects of identities in other clients that match the requested identities. This requires domain linking."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "refreshTokenUrl",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "body",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "API Token",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{API_BASE_URL}}/token",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{CLIENT_SECRET}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{CLIENT_ID}}",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"let body = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};",
+					"Object.keys(body).forEach(key => {",
+					"    if (!body[key]) delete body[key];",
+					"});",
+					"pm.request.body.raw = JSON.stringify(body);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_BASE_URL",
+			"value": "https://platform.uat.proveapis.com",
+			"type": "string"
+		},
+		{
+			"key": "CLIENT_ID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CLIENT_SECRET",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
