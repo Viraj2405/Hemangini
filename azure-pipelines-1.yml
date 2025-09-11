@@ -28,7 +28,7 @@ variables:
   value: 'https://apiscanner.bugdazz.com/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: ''
+  value: 'b180d662-6d9c-4ada-8519-59edf71a6e54'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -43,13 +43,13 @@ variables:
   value: 'true'
 
 - name: CRITICAL_THRESHOLD
-  value: ''
+  value: '0'
 
 - name: HIGH_THRESHOLD
-  value: ''
+  value: '0'
 
 - name: MEDIUM_THRESHOLD
-  value: ''
+  value: '0'
 
 pool:
   vmImage: 'windows-latest'
