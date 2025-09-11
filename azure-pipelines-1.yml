@@ -31,7 +31,7 @@ variables:
   value: 'b180d662-6d9c-4ada-8519-59edf71a6e54'
 
 - name: BLOCK_PIPELINE
-  value: 'false'
+  value: 'true'
 
 - name: BLOCK_CRITICAL
   value: 'true'
