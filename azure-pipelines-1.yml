@@ -16,22 +16,22 @@ variables:
   value: ''
 
 - name: SECURITY_SCAN_API
-  value: 'https://apiscanner.bugdazz.com/v1/startSecurityScan'
+  value: 'https://ef9d279c7bfd.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://apiscanner.bugdazz.com/v1/webHook'
+  value: 'https://ef9d279c7bfd.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: 'b115f598-a123-4b36-9d2a-c239c810884e'
+  value: '4f0a38b4-eb21-429c-8c6f-6c53e3d24f97'
 
 - name: REPORT_API
-  value: 'https://apiscanner.bugdazz.com/v1/integrationPdf'
+  value: 'https://ef9d279c7bfd.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: 'b180d662-6d9c-4ada-8519-59edf71a6e54'
+  value: '130b9bf0-cefe-4642-8fc3-045eb921bdda'
 
 - name: BLOCK_PIPELINE
-  value: 'true'
+  value: 'false'
 
 - name: BLOCK_CRITICAL
   value: 'true'
@@ -69,7 +69,7 @@ steps:
       if ($file) {
         Write-Host "Found file: $($file.FullName)"
         Copy-Item -Path $file.FullName -Destination "$(FILE_NAME)"
-        curl.exe --insecure --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
+        curl.exe --location --form "file=@$(FILE_NAME)" --form "project_id=$(PROJECT_ID)" "$(UPLOAD_API_URL)"
       } else {
         throw "File '$(FILE_NAME)' not found in repository."
       }
@@ -87,7 +87,7 @@ steps:
         "--header", "Content-Length: 0"
       )
       $args = @(
-        "--insecure",
+        "--max-time", "6000", # 100 minutes timeout
         "--location",
         "--request", "POST",
         $apiUrl
@@ -147,15 +147,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { return $true }
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250911_162127.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250912_155507.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/_20250911_162127.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250912_155507.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
