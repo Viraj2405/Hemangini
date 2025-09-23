@@ -28,7 +28,7 @@ variables:
   value: 'https://3f9abd2fa0d8.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: ''
+  value: '38209732-959b-43f3-b524-f8f0e4394cc7'
 
 - name: BLOCK_PIPELINE
   value: 'false'
