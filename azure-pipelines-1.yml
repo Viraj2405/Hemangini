@@ -16,16 +16,16 @@ variables:
   value: ''
 
 - name: SECURITY_SCAN_API
-  value: 'https://3f9abd2fa0d8.ngrok-free.app/v1/startSecurityScan'
+  value: 'https://f2b401ab0925.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://3f9abd2fa0d8.ngrok-free.app/v1/webHook'
+  value: 'https://f2b401ab0925.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
   value: '4f0a38b4-eb21-429c-8c6f-6c53e3d24f97'
 
 - name: REPORT_API
-  value: 'https://3f9abd2fa0d8.ngrok-free.app/v1/integrationPdf'
+  value: 'https://f2b401ab0925.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
   value: '38209732-959b-43f3-b524-f8f0e4394cc7'
