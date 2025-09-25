@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "034f9569-adcc-4632-aee0-445e0234c14d",
+		"name": "FreeBusy REST API",
+		"description": "Preliminary API documentation subject to change.\n\n# API Security\n\nAll requests made to the FreeBusy REST API require an authorization token in the form of an API Key. API Keys are scoped to either teams or individuals:\n\n*   Team API Keys allow you to create webhooks scoped to all team scheduling activity and can be obtained from the [Team Management Page](https://freebusy.io/app/subscriptions) (formerly known as the Subscription Management Page).\n*   Individual API Keys allow you to create webhook scope to an individual's scheduling activity and can be obtained from the [Calendars & Integrations Page](https://freebusy.io/app/integrations) (coming soon)\n    \n\nThe API Key must be supplied with every REST API request in the `Authorization` header using the `Bearer` scheme, like this:\n\n```\nPOST https://api.freebusy.io/v1/webhook\nAuthorization: Bearer [API Key]\n\n```\n\n# Webhook Notifications\n\nYou can create webhooks to be notified about these types of scheduling activity:\n\n*   `event.scheduled`  \n    Triggered when a calendar event is created by FreeBusy as a result of an appointment being scheduled via a booking page (whether manually as a result of Manual Accept or automatically as a result of Auto-Accept policy) or a poll being scheduled (whether manually by the organizer or delegate or automatically because it reached consensus)\n*   `event.rescheduled`  \n    Triggered when the time for a calendar event created by FreeBusy is changed as a result of either the host or a guest using the reschedule link to reschedule via FreeBusy. This notification is not triggered when the calendar event is changed directly in the calendar.\n*   `event.cancelled`  \n    Triggered when the calendar event created by FreeBusy is cancelled and deleted as a result of either the host or a guest using the reschedule link to cancel via FreeBusy. This notification is not triggered when the calendar event is removed directly from the calendar.\n    \n\n# Webhook Security\n\n## Ensuring authenticity of Create Webhook request\n\nTo protect the target URL from abuse and to ensure that a Create Webhook request is submitted by the owner of the webhook target URL, FreeBusy validates the Create Webhook request by posting a validation message to the target URL with an activation code in the `X-Webhook-ActivationCode` header.\n\nTo confirm authenticity of the Create Webhook request, target URL must reflect the `X-Webhook-ActivationCode` header and value back to FreeBusy by including it in the response.\n\n### **Sample validation sequence:**\n\nRequest from FreeBusy to target URL:\n\n```\nPOST https://hooks.freebusy.io/freebusy\nX-Webhook-ActivationCode: abcdefgh\n\n```\n\nResponse from target URL to FreeBusy:\n\n```\n200 OK\nX-Webhook-ActivationCode: abcdefgh\n\n```\n\n### Best practice:\n\nDon't treat the validation response as a one-off operation, rather implement your webhook so it continuously reflects the `X-Webhook-ActivationCode` header value back to FreeBusy for any request that contains it. This is because FreeBusy may use this validation technique if your webhook becomes inactive due to repeated errors why notifications are being POST-ed.\n\nAn easy way to do this is to include the validation handling code at the top of the function that processes incoming webhook notifications like this (pseudocode):\n\n```\nif (request.headers[\"X-Webhook-Activation\"] !== null) {\n  response.headers.add(\"X-Webhook-Activation\", request.headers[\"X-Webhook-Activation\"].value);\n  return Ok();\n}\n\n```\n\n## Ensuring authenticity of posted Webhook Notifications\n\nTo ensure that notifications POST-ed to the target URL originate with FreeBusy, target URL owner can submit a self-generated secret when creating the webhook. FreeBusy will use this secret to compute a SHA-1 [HMAC](https://en.wikipedia.org/wiki/HMAC) for the POST-ed notification and will include the SHA-1 [HMAC](https://en.wikipedia.org/wiki/HMAC) value in the `X-Webhook-Signature` header. Target URL can use its own self-generated secret to perform its own [HMAC](https://en.wikipedia.org/wiki/HMAC) calculation and compare with the FreeBusy value included with the notification.\n\n### Sample Webhook Notification\n\n```\nPOST https://hooks.freebusy.io/freebusy\nX-Webhook-Signature: de7c9b85b8b78aa6bc8a7a36f70a90701c9db4d9\n{\n    \"webhookId\": \"e4230c8b-f0b2-4625-bacc-573adc21785c\",\n    \"notificationId\": \"161c60cf-b926-417a-94cb-2a8bf6966b4c\",\n    \"notificationType\": \"event.scheduled\",\n    \"notificationTimestamp\": 1647292633,\n    \"payload\": {\n        \"id\": \"efc8ddfd88874fd38cd289053ce560b1\",\n        \"startTime\": \"2022-03-14T21:17:13.6798312Z\",\n        \"durationInMin\": 45,\n        \"subject\": \"This field would contain the name of the event\",\n        \"location\": \"This field would contain the locatin of the event\",\n        \"organizer\": {\n            \"email\": \"organizer@example.com\",\n            \"name\": \"Orgnizer Name\",\n            \"timeZone\": \"America/New_York\"\n        },\n        \"participants\": [\n            {\n                \"email\": \"organizer@example.com\",\n                \"name\": \"Orgnizer Name\",\n                \"timeZone\": \"America/New_York\"\n            },\n            {\n                \"email\": \"participant@example.com\",\n                \"name\": \"Participant Name\",\n                \"timeZone\": \"America/Los_Angeles\"\n            }\n        ],\n        \"link\": \"https://freebusy.io/example/event-template\",\n        \"rescheduleUrl\": \"https://freebusy.io/m/efc8ddfd88874fd38cd289053ce560b1\",\n        \"cancelUrl\": \"https://freebusy.io/m/efc8ddfd88874fd38cd289053ce560b1/cancel\"\n    }\n}\n\n```\n\nContact Support:  \nEmail: [hello@freebusy.io](mailto:hello@freebusy.io)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759",
+		"_collection_link": "https://www.postman.com/freebusy/freebusy/collection/febjs1b/freebusy-rest-api?action=share&source=collection_link&creator=23236759"
+	},
+	"item": [
+		{
+			"name": "webhook",
+			"item": [
+				{
+					"name": "{{baseUrl}}/webhook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<API Key>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer <API Key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"url\": \"https://hooks.example.com/freebusy\",\n  \"notificationTypes\": [\n    \"event.scheduled\",\n    \"event.rescheduled\",\n    \"event.cancelled\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/webhook",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"webhook"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <API Key>",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"url\": \"https://hooks.example.com/freebusy\",\n  \"notificationTypes\": [\n    \"event.scheduled\",\n    \"event.rescheduled\",\n    \"event.cancelled\"\n  ],\n  \"secret\": \"qwertyuioopasdfghjklzxcvbnm\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.freebusy.io/v1/webhook",
+									"protocol": "https",
+									"host": [
+										"api",
+										"freebusy",
+										"io"
+									],
+									"path": [
+										"v1",
+										"webhook"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"3d4c7349-2122-a534-2296-111519e3919d\",\n  \"url\": \"https://hooks.example.com/freebusy\",\n  \"notificationTypes\": [\n    \"event.scheduled\",\n    \"event.rescheduled\",\n    \"event.cancelled\"\n  ]\n}"
+						},
+						{
+							"name": "Invalid input",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <API Key>",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"url\": \"amet dolore in\",\n  \"events\": [\n    \"event.scheduled\",\n    \"event.rescheduled\",\n    \"event.cancelled\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/webhook",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"webhook"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "{{baseUrl}}/webhook/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<API Key>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/webhook/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"webhook",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3d4c7349-2122-a534-2296-111519e3919d",
+									"description": "(Required) Webhook id to test"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Submitted",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <API Key>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.freebusy.io/v1/webhook/:id",
+									"protocol": "https",
+									"host": [
+										"api",
+										"freebusy",
+										"io"
+									],
+									"path": [
+										"v1",
+										"webhook",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3d4c7349-2122-a534-2296-111519e3919d",
+											"description": "(Required) Webhook id to delete"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Invalid ID supplied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <API Key>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/webhook/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"webhook",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "cillum pariatur in reprehenderit",
+											"description": "(Required) Webhook id to delete"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "{{baseUrl}}/webhook/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<API Key>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/webhook/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"webhook",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3d4c7349-2122-a534-2296-111519e3919d",
+									"description": "(Required) Webhook id to delete"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <API Key>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.freebusy.io/v1/webhook/:id",
+									"protocol": "https",
+									"host": [
+										"api",
+										"freebusy",
+										"io"
+									],
+									"path": [
+										"v1",
+										"webhook",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3d4c7349-2122-a534-2296-111519e3919d",
+											"description": "(Required) Webhook id to delete"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Invalid ID supplied",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <API Key>",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/webhook/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"webhook",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "cillum pariatur in reprehenderit",
+											"description": "(Required) Webhook id to delete"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Webhook Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Webhook-Signature",
+								"value": "qwertyuioopasdfghjklzxcvbnm",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"webhookId\": \"e4230c8b-f0b2-4625-bacc-573adc21785c\",\r\n    \"notificationId\": \"161c60cf-b926-417a-94cb-2a8bf6966b4c\",\r\n    \"notificationType\": \"event.scheduled\",\r\n    \"notificationTimestamp\": 1647292633,\r\n    \"payload\": {\r\n        \"id\": \"efc8ddfd88874fd38cd289053ce560b1\",\r\n        \"startTime\": \"2022-03-14T21:17:13.6798312Z\",\r\n        \"durationInMin\": 45,\r\n        \"subject\": \"This field would contain the name of the event\",\r\n        \"location\": \"This field would contain the locatin of the event\",\r\n        \"organizer\": {\r\n            \"email\": \"organizer@example.com\",\r\n            \"name\": \"Orgnizer Name\",\r\n            \"timeZone\": \"America/New_York\"\r\n        },\r\n        \"participants\": [\r\n            {\r\n                \"email\": \"organizer@example.com\",\r\n                \"name\": \"Orgnizer Name\",\r\n                \"timeZone\": \"America/New_York\"\r\n            },\r\n            {\r\n                \"email\": \"participant@example.com\",\r\n                \"name\": \"Participant Name\",\r\n                \"timeZone\": \"America/Los_Angeles\"\r\n            }\r\n        ],\r\n        \"link\": \"https://freebusy.io/example/event-template\",\r\n        \"rescheduleUrl\": \"https://freebusy.io/m/efc8ddfd88874fd38cd289053ce560b1\",\r\n        \"cancelUrl\": \"https://freebusy.io/m/efc8ddfd88874fd38cd289053ce560b1/cancel\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/targetURL",
+							"path": [
+								"targetURL"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "<API Key>",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "<API Key>",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.freebusy.io/v1",
+			"type": "string"
+		}
+	]
+}
