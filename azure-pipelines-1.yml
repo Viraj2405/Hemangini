@@ -7,28 +7,28 @@ variables:
 - group: "BugDazz"
 
 - name: REPO_URL
-  value: "https://$(API_SC_TOKEN)@github.com/Viraj2405/Hemangini"
+  value: "https://$(API_SC_TOKEN)@"
 
 - name: BRANCH
-  value: 'main'
+  value: ''
 
 - name: FILE_NAME
-  value: 'FreeBusy REST API.postman_collection.json'
+  value: ''
 
 - name: SECURITY_SCAN_API
-  value: 'https://apiscanner.bugdazz.com/v1/startSecurityScan'
+  value: 'https://b1060a2a9665.ngrok-free.app/v1/startSecurityScan'
 
 - name: UPLOAD_API_URL
-  value: 'https://apiscanner.bugdazz.com/v1/webHook'
+  value: 'https://b1060a2a9665.ngrok-free.app/v1/webHook'
 
 - name: APPKEYTOKEN
-  value: 'b115f598-a123-4b36-9d2a-c239c810884e'
+  value: '4f0a38b4-eb21-429c-8c6f-6c53e3d24f97'
 
 - name: REPORT_API
-  value: 'https://apiscanner.bugdazz.com/v1/integrationPdf'
+  value: 'https://b1060a2a9665.ngrok-free.app/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: '1df92a57-bff7-4d20-b4c3-fb13e1790585'
+  value: '38209732-959b-43f3-b524-f8f0e4394cc7'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -87,6 +87,7 @@ steps:
         "--header", "Content-Length: 0"
       )
       $args = @(
+      "--max-time", "6000", # 100 minutes timeout
         "--location",
         "--request", "POST",
         $apiUrl
@@ -146,14 +147,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250925_131055.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250925_183650.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/_20250925_131055.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250925_183650.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
