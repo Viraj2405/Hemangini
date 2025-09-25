@@ -28,7 +28,7 @@ variables:
   value: 'https://apiscanner.bugdazz.com/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: '16288d24-f585-4b0c-a614-5f7ce4a50766'
+  value: 'a4c27b29-21ca-4dc0-8457-dfa4d35275f3'
 
 - name: BLOCK_PIPELINE
   value: 'false'
@@ -146,14 +146,14 @@ steps:
         project_id = "$(PROJECT_ID)"
       } | ConvertTo-Json
       Write-Host "Sending JSON body: $body"
-      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "FreeBusy REST API_20250925_130021.pdf"
+      Invoke-RestMethod -Uri $reportApi -Method Post -Headers $headers -Body $body -OutFile "_20250925_130330.pdf"
       Write-Host "PDF report saved as report.pdf"
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Vulnerability Report'
   condition: or(gt(variables['critical'], 0), gt(variables['high'], 0), gt(variables['medium'], 0))
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/FreeBusy REST API_20250925_130021.pdf'
+    targetPath: '$(System.DefaultWorkingDirectory)/_20250925_130330.pdf'
     artifact: 'VulnerabilityReport'
     publishLocation: 'pipeline'
 
