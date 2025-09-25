@@ -28,7 +28,7 @@ variables:
   value: 'https://apiscanner.bugdazz.com/v1/integrationPdf'
 
 - name: PROJECT_ID
-  value: '12a28c3e-87d6-492b-97f1-34e2bf846ccd'
+  value: '6ea6d281-27da-43f7-af2f-45f26e9c6cb8'
 
 - name: BLOCK_PIPELINE
   value: 'false'
