@@ -1,0 +1,542 @@
+{
+	"info": {
+		"_postman_id": "edf0cb0d-64e7-4910-bd3e-4a5c9a9555b7",
+		"name": "Books API Service documentation",
+		"description": "# 🚀 Books API Service\n\nWelcome, this API service run on Python / Django, it offers CRUDs for users, authors, and books resources.\n\nGitHub repository: [https://github.com/molero3111/books_api_service](https://github.com/molero3111/books_api)\n\n## 🔖 Notes\n\n- Only users with admin role may perform CRUD operations.\n    \n\n## **Getting started guide**\n\n- Set up your postman environment, go to the enviroments tab on the left menu, you may create a new enviroment or use the global environment, add env var base_url, since the project runs locally you can set it to [http://localhost:8001/api/](http://localhost:8000/api/) . Also set var bearer_token whose value you will modify later after you log in, this bearer token is used for all request. Finally select the environment you added these variables to, it should be on the top right corner in postman.\n- Log in using /login enpoint located in Authentication collection, you will get a token, go to your enviroment again, and change the value of your bearer_token var.\n    \n\nAfter following these steps you may send requests to each enpoint in the users, authors, and books collections.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759",
+		"_collection_link": "https://www.postman.com/molero3111/books-api/collection/t44u1uo/books-api-service-documentation?action=share&source=collection_link&creator=23236759"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Log in",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\":\"john23\",\n    \"password\": \"test23\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}login/",
+							"host": [
+								"{{base_url}}login"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Logs a user into the system, notice that only admins are able to perform CRUD actions, remember to set up your admin user using php artisan create:admin as stated in the README.md file of the repository ([https://github.com/molero3111/books_api/](https://github.com/molero3111/books_api/))"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}logout/",
+							"host": [
+								"{{base_url}}logout"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Logs out a user, it destroys their bearer token."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}users?page=1",
+							"host": [
+								"{{base_url}}users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Shows list of users, the response is paginated, so it fetches 50 users per page, you may attach page param to the url query params as ?page=1 to view different pages. the maximum users it can get is 50 per page, if you need fewer records, you can add page_size to the query params."
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"daniel\",\n    \"username\": \"dan\",\n    \"email\": \"dan@test.com\",\n    \"password\": \"dan2\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}users/",
+							"host": [
+								"{{base_url}}users"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Creates a new user, you may specify what role to assign, it can be admin or user."
+					},
+					"response": []
+				},
+				{
+					"name": "User Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}users/502/",
+							"host": [
+								"{{base_url}}users"
+							],
+							"path": [
+								"502",
+								""
+							]
+						},
+						"description": "Shows info about an specific user."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"username\": \"ma0000r42000342\",\n        \"email\": \"mart@test.com\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}users/502/",
+							"host": [
+								"{{base_url}}users"
+							],
+							"path": [
+								"502",
+								""
+							]
+						},
+						"description": "Updates info about an user, it allows a flexible update, meaning you send only the field you wish to update.  \n  \nNotice the http verb is PATCH instead of PUT, which is also available but it requires all fields for a full update, so using patch will allow partial updates."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}users/6/",
+							"host": [
+								"{{base_url}}users"
+							],
+							"path": [
+								"6",
+								""
+							]
+						},
+						"description": "Completely deletes an user. This involves deleting their author data as well as books that were associated to them."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Authors List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}authors?page=1",
+							"host": [
+								"{{base_url}}authors"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Shows list of authors, the response is paginated, so it fetches 50 authors per page, you may attach page param to the url query params as ?page=1 to view different pages."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Author",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nickname\": \"danny\",\n    \"published_books\": 0,\n    \"user\": 502\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}authors/",
+							"host": [
+								"{{base_url}}authors"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Creates a new author.\n\nThe user param must be set to the id of an existing user."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"nickname\": \"ma0000r42000342\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}authors/504/",
+							"host": [
+								"{{base_url}}authors"
+							],
+							"path": [
+								"504",
+								""
+							]
+						},
+						"description": "Updates info about an author, it allows a flexible update, meaning you send only the field you wish to update.\n\nNotice the http verb is PATCH instead of PUT, which is also available but it requires all fields for a full update, so using patch will allow partial updates."
+					},
+					"response": []
+				},
+				{
+					"name": "Author Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}authors/505/",
+							"host": [
+								"{{base_url}}authors"
+							],
+							"path": [
+								"505",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Author",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}authors/7/",
+							"host": [
+								"{{base_url}}authors"
+							],
+							"path": [
+								"7",
+								""
+							]
+						},
+						"description": "Completely deletes an author. This involves deleting books that were associated to them."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Books List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}books?page=1",
+							"host": [
+								"{{base_url}}books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Shows list of books, the response is paginated, so it fetches 50 books per page, you may attach page param to the url query params as ?page=1 to view different pages."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"author\": 505,\n    \"title\": \"test 6009i00\",\n    \"genre\":\"fiction\",\n    \"published_at\": \"2020-02-02 12:12:12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}books/",
+							"host": [
+								"{{base_url}}books"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Creates a new book.\n\nThe author param must be the id of an existing author.\n\nWhen a book is created, the published_books field in the author associated with it will be updated as well."
+					},
+					"response": []
+				},
+				{
+					"name": "Book  Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}books/2502/",
+							"host": [
+								"{{base_url}}books"
+							],
+							"path": [
+								"2502",
+								""
+							]
+						},
+						"description": "Shows info about an specific book."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"test 9\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}books/2502/",
+							"host": [
+								"{{base_url}}books"
+							],
+							"path": [
+								"2502",
+								""
+							]
+						},
+						"description": "Updates info about a book, it allows a flexible update, meaning you send only the field you wish to update."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}books/2507/",
+							"host": [
+								"{{base_url}}books"
+							],
+							"path": [
+								"2507",
+								""
+							]
+						},
+						"description": "Completely deletes a book.\n\nWhen a book is deleted, the published_books field in the author associated with it will be updated as well."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Export",
+			"item": [
+				{
+					"name": "Export authors and books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}export/authors/books/",
+							"host": [
+								"{{base_url}}export"
+							],
+							"path": [
+								"authors",
+								"books",
+								""
+							]
+						},
+						"description": "Generates and downloads a xlsx file with data from all authors and books. when testing on postgman make user to use send and download option so you can download the file, sending request on a browser will download the file automatically, it might prompt the user for permission to download depending on browser settings."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
