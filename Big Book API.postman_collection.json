@@ -1,0 +1,1571 @@
+{
+	"info": {
+		"_postman_id": "671cc140-83db-4360-bc22-ecc7fea27319",
+		"name": "Big Book API",
+		"description": "The world's book wrapped into a single API.\n\nContact Support:\n Name: David Urbansky\n Email: mail@bigbookapi.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23236759"
+	},
+	"item": [
+		{
+			"name": "search-books",
+			"item": [
+				{
+					"name": "Search Books",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/search-books?query=<string>&earliest-publish-year=<number>&latest-publish-year=<number>&min-rating=<number>&max-rating=<number>&genres=<string>&authors=<string>&isbn=<string>&oclc=<string>&sort=<string>&sort-direction=<string>&offset=<number>&number=<number>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search-books"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "<string>",
+									"description": "The search query."
+								},
+								{
+									"key": "earliest-publish-year",
+									"value": "<number>",
+									"description": "The books must have been published after this year."
+								},
+								{
+									"key": "latest-publish-year",
+									"value": "<number>",
+									"description": "The books must have been published before this year."
+								},
+								{
+									"key": "min-rating",
+									"value": "<number>",
+									"description": "The minimum rating the book must have gotten in the interval [0,1]."
+								},
+								{
+									"key": "max-rating",
+									"value": "<number>",
+									"description": "The maximum rating the book must have gotten in the interval [0,1]."
+								},
+								{
+									"key": "genres",
+									"value": "<string>",
+									"description": "A comma-separated list of  genres. Only books from any of the given genres will be returned."
+								},
+								{
+									"key": "authors",
+									"value": "<string>",
+									"description": "A comma-separated list of author ids or names. Only books from any of the given authors will be returned. You can retrieve author ids from the search authors endpoint. Pass author names is slower and if two authors have the same name you can't disambiguate."
+								},
+								{
+									"key": "isbn",
+									"value": "<string>",
+									"description": "Only the book matching the ISBN-13 will be returned"
+								},
+								{
+									"key": "oclc",
+									"value": "<string>",
+									"description": "Only the book matching the OCLC will be returned"
+								},
+								{
+									"key": "sort",
+									"value": "<string>",
+									"description": "The sorting criteria (publish-date or rating)."
+								},
+								{
+									"key": "sort-direction",
+									"value": "<string>",
+									"description": "Whether to sort ascending or descending (ASC or DESC)."
+								},
+								{
+									"key": "offset",
+									"value": "<number>",
+									"description": "The number of books to skip in range [0,1000]"
+								},
+								{
+									"key": "number",
+									"value": "<number>",
+									"description": "The number of books to return in range [1,100]"
+								}
+							]
+						},
+						"description": " Search and filter books based on matching a query, the ISBN, rating, and more fields. The query is semantically parsed using our own large ontology. That means you can search for \"books about dogs\" and will automatically also find books about \"border collies\" and other types without specifying them in the query. "
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/search-books?query=<string>&earliest-publish-year=<number>&latest-publish-year=<number>&min-rating=<number>&max-rating=<number>&genres=<string>&authors=<string>&isbn=<string>&oclc=<string>&sort=<string>&sort-direction=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-books"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>",
+											"description": "The search query."
+										},
+										{
+											"key": "earliest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published after this year."
+										},
+										{
+											"key": "latest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published before this year."
+										},
+										{
+											"key": "min-rating",
+											"value": "<number>",
+											"description": "The minimum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "max-rating",
+											"value": "<number>",
+											"description": "The maximum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "genres",
+											"value": "<string>",
+											"description": "A comma-separated list of  genres. Only books from any of the given genres will be returned."
+										},
+										{
+											"key": "authors",
+											"value": "<string>",
+											"description": "A comma-separated list of author ids or names. Only books from any of the given authors will be returned. You can retrieve author ids from the search authors endpoint. Pass author names is slower and if two authors have the same name you can't disambiguate."
+										},
+										{
+											"key": "isbn",
+											"value": "<string>",
+											"description": "Only the book matching the ISBN-13 will be returned"
+										},
+										{
+											"key": "oclc",
+											"value": "<string>",
+											"description": "Only the book matching the OCLC will be returned"
+										},
+										{
+											"key": "sort",
+											"value": "<string>",
+											"description": "The sorting criteria (publish-date or rating)."
+										},
+										{
+											"key": "sort-direction",
+											"value": "<string>",
+											"description": "Whether to sort ascending or descending (ASC or DESC)."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of books to skip in range [0,1000]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of books to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-books?query=<string>&earliest-publish-year=<number>&latest-publish-year=<number>&min-rating=<number>&max-rating=<number>&genres=<string>&authors=<string>&isbn=<string>&oclc=<string>&sort=<string>&sort-direction=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-books"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>",
+											"description": "The search query."
+										},
+										{
+											"key": "earliest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published after this year."
+										},
+										{
+											"key": "latest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published before this year."
+										},
+										{
+											"key": "min-rating",
+											"value": "<number>",
+											"description": "The minimum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "max-rating",
+											"value": "<number>",
+											"description": "The maximum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "genres",
+											"value": "<string>",
+											"description": "A comma-separated list of  genres. Only books from any of the given genres will be returned."
+										},
+										{
+											"key": "authors",
+											"value": "<string>",
+											"description": "A comma-separated list of author ids or names. Only books from any of the given authors will be returned. You can retrieve author ids from the search authors endpoint. Pass author names is slower and if two authors have the same name you can't disambiguate."
+										},
+										{
+											"key": "isbn",
+											"value": "<string>",
+											"description": "Only the book matching the ISBN-13 will be returned"
+										},
+										{
+											"key": "oclc",
+											"value": "<string>",
+											"description": "Only the book matching the OCLC will be returned"
+										},
+										{
+											"key": "sort",
+											"value": "<string>",
+											"description": "The sorting criteria (publish-date or rating)."
+										},
+										{
+											"key": "sort-direction",
+											"value": "<string>",
+											"description": "Whether to sort ascending or descending (ASC or DESC)."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of books to skip in range [0,1000]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of books to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Payment Required",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-books?query=<string>&earliest-publish-year=<number>&latest-publish-year=<number>&min-rating=<number>&max-rating=<number>&genres=<string>&authors=<string>&isbn=<string>&oclc=<string>&sort=<string>&sort-direction=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-books"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>",
+											"description": "The search query."
+										},
+										{
+											"key": "earliest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published after this year."
+										},
+										{
+											"key": "latest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published before this year."
+										},
+										{
+											"key": "min-rating",
+											"value": "<number>",
+											"description": "The minimum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "max-rating",
+											"value": "<number>",
+											"description": "The maximum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "genres",
+											"value": "<string>",
+											"description": "A comma-separated list of  genres. Only books from any of the given genres will be returned."
+										},
+										{
+											"key": "authors",
+											"value": "<string>",
+											"description": "A comma-separated list of author ids or names. Only books from any of the given authors will be returned. You can retrieve author ids from the search authors endpoint. Pass author names is slower and if two authors have the same name you can't disambiguate."
+										},
+										{
+											"key": "isbn",
+											"value": "<string>",
+											"description": "Only the book matching the ISBN-13 will be returned"
+										},
+										{
+											"key": "oclc",
+											"value": "<string>",
+											"description": "Only the book matching the OCLC will be returned"
+										},
+										{
+											"key": "sort",
+											"value": "<string>",
+											"description": "The sorting criteria (publish-date or rating)."
+										},
+										{
+											"key": "sort-direction",
+											"value": "<string>",
+											"description": "Whether to sort ascending or descending (ASC or DESC)."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of books to skip in range [0,1000]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of books to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Payment Required",
+							"code": 402,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-books?query=<string>&earliest-publish-year=<number>&latest-publish-year=<number>&min-rating=<number>&max-rating=<number>&genres=<string>&authors=<string>&isbn=<string>&oclc=<string>&sort=<string>&sort-direction=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-books"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>",
+											"description": "The search query."
+										},
+										{
+											"key": "earliest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published after this year."
+										},
+										{
+											"key": "latest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published before this year."
+										},
+										{
+											"key": "min-rating",
+											"value": "<number>",
+											"description": "The minimum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "max-rating",
+											"value": "<number>",
+											"description": "The maximum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "genres",
+											"value": "<string>",
+											"description": "A comma-separated list of  genres. Only books from any of the given genres will be returned."
+										},
+										{
+											"key": "authors",
+											"value": "<string>",
+											"description": "A comma-separated list of author ids or names. Only books from any of the given authors will be returned. You can retrieve author ids from the search authors endpoint. Pass author names is slower and if two authors have the same name you can't disambiguate."
+										},
+										{
+											"key": "isbn",
+											"value": "<string>",
+											"description": "Only the book matching the ISBN-13 will be returned"
+										},
+										{
+											"key": "oclc",
+											"value": "<string>",
+											"description": "Only the book matching the OCLC will be returned"
+										},
+										{
+											"key": "sort",
+											"value": "<string>",
+											"description": "The sorting criteria (publish-date or rating)."
+										},
+										{
+											"key": "sort-direction",
+											"value": "<string>",
+											"description": "Whether to sort ascending or descending (ASC or DESC)."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of books to skip in range [0,1000]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of books to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-books?query=<string>&earliest-publish-year=<number>&latest-publish-year=<number>&min-rating=<number>&max-rating=<number>&genres=<string>&authors=<string>&isbn=<string>&oclc=<string>&sort=<string>&sort-direction=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-books"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>",
+											"description": "The search query."
+										},
+										{
+											"key": "earliest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published after this year."
+										},
+										{
+											"key": "latest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published before this year."
+										},
+										{
+											"key": "min-rating",
+											"value": "<number>",
+											"description": "The minimum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "max-rating",
+											"value": "<number>",
+											"description": "The maximum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "genres",
+											"value": "<string>",
+											"description": "A comma-separated list of  genres. Only books from any of the given genres will be returned."
+										},
+										{
+											"key": "authors",
+											"value": "<string>",
+											"description": "A comma-separated list of author ids or names. Only books from any of the given authors will be returned. You can retrieve author ids from the search authors endpoint. Pass author names is slower and if two authors have the same name you can't disambiguate."
+										},
+										{
+											"key": "isbn",
+											"value": "<string>",
+											"description": "Only the book matching the ISBN-13 will be returned"
+										},
+										{
+											"key": "oclc",
+											"value": "<string>",
+											"description": "Only the book matching the OCLC will be returned"
+										},
+										{
+											"key": "sort",
+											"value": "<string>",
+											"description": "The sorting criteria (publish-date or rating)."
+										},
+										{
+											"key": "sort-direction",
+											"value": "<string>",
+											"description": "Whether to sort ascending or descending (ASC or DESC)."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of books to skip in range [0,1000]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of books to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too Many Requests",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-books?query=<string>&earliest-publish-year=<number>&latest-publish-year=<number>&min-rating=<number>&max-rating=<number>&genres=<string>&authors=<string>&isbn=<string>&oclc=<string>&sort=<string>&sort-direction=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-books"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>",
+											"description": "The search query."
+										},
+										{
+											"key": "earliest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published after this year."
+										},
+										{
+											"key": "latest-publish-year",
+											"value": "<number>",
+											"description": "The books must have been published before this year."
+										},
+										{
+											"key": "min-rating",
+											"value": "<number>",
+											"description": "The minimum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "max-rating",
+											"value": "<number>",
+											"description": "The maximum rating the book must have gotten in the interval [0,1]."
+										},
+										{
+											"key": "genres",
+											"value": "<string>",
+											"description": "A comma-separated list of  genres. Only books from any of the given genres will be returned."
+										},
+										{
+											"key": "authors",
+											"value": "<string>",
+											"description": "A comma-separated list of author ids or names. Only books from any of the given authors will be returned. You can retrieve author ids from the search authors endpoint. Pass author names is slower and if two authors have the same name you can't disambiguate."
+										},
+										{
+											"key": "isbn",
+											"value": "<string>",
+											"description": "Only the book matching the ISBN-13 will be returned"
+										},
+										{
+											"key": "oclc",
+											"value": "<string>",
+											"description": "Only the book matching the OCLC will be returned"
+										},
+										{
+											"key": "sort",
+											"value": "<string>",
+											"description": "The sorting criteria (publish-date or rating)."
+										},
+										{
+											"key": "sort-direction",
+											"value": "<string>",
+											"description": "Whether to sort ascending or descending (ASC or DESC)."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of books to skip in range [0,1000]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of books to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "{id}",
+			"item": [
+				{
+					"name": "similar",
+					"item": [
+						{
+							"name": "Find Similar Books",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id/similar?number=<number>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id",
+										"similar"
+									],
+									"query": [
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of similar books to return in range [1,100]"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<number>",
+											"description": "(Required) The id of the book to which similar books should be found."
+										}
+									]
+								},
+								"description": " Find books that are similar to the given book. "
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/:id/similar?number=<number>&api-key=<API Key>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												":id",
+												"similar"
+											],
+											"query": [
+												{
+													"key": "number",
+													"value": "<number>",
+													"description": "The number of similar books to return in range [1,100]"
+												},
+												{
+													"key": "api-key",
+													"value": "<API Key>",
+													"description": "Added as a part of security scheme: apikey"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/:id/similar?number=<number>&api-key=<API Key>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												":id",
+												"similar"
+											],
+											"query": [
+												{
+													"key": "number",
+													"value": "<number>",
+													"description": "The number of similar books to return in range [1,100]"
+												},
+												{
+													"key": "api-key",
+													"value": "<API Key>",
+													"description": "Added as a part of security scheme: apikey"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Payment Required",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/:id/similar?number=<number>&api-key=<API Key>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												":id",
+												"similar"
+											],
+											"query": [
+												{
+													"key": "number",
+													"value": "<number>",
+													"description": "The number of similar books to return in range [1,100]"
+												},
+												{
+													"key": "api-key",
+													"value": "<API Key>",
+													"description": "Added as a part of security scheme: apikey"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Payment Required",
+									"code": 402,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/:id/similar?number=<number>&api-key=<API Key>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												":id",
+												"similar"
+											],
+											"query": [
+												{
+													"key": "number",
+													"value": "<number>",
+													"description": "The number of similar books to return in range [1,100]"
+												},
+												{
+													"key": "api-key",
+													"value": "<API Key>",
+													"description": "Added as a part of security scheme: apikey"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/:id/similar?number=<number>&api-key=<API Key>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												":id",
+												"similar"
+											],
+											"query": [
+												{
+													"key": "number",
+													"value": "<number>",
+													"description": "The number of similar books to return in range [1,100]"
+												},
+												{
+													"key": "api-key",
+													"value": "<API Key>",
+													"description": "Added as a part of security scheme: apikey"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Too Many Requests",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/:id/similar?number=<number>&api-key=<API Key>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												":id",
+												"similar"
+											],
+											"query": [
+												{
+													"key": "number",
+													"value": "<number>",
+													"description": "The number of similar books to return in range [1,100]"
+												},
+												{
+													"key": "api-key",
+													"value": "<API Key>",
+													"description": "Added as a part of security scheme: apikey"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Too Many Requests",
+									"code": 429,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get Book Information",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<number>",
+									"description": "(Required) The id of the book."
+								}
+							]
+						},
+						"description": " Get all information about a certain book. "
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id?api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"query": [
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/:id?api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"query": [
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Payment Required",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/:id?api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"query": [
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Payment Required",
+							"code": 402,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/:id?api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"query": [
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/:id?api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"query": [
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too Many Requests",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/:id?api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"query": [
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "search-authors",
+			"item": [
+				{
+					"name": "Search Authors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/search-authors?name=<string>&offset=<number>&number=<number>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search-authors"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "<string>",
+									"description": "The (partial/beginning) name of the author."
+								},
+								{
+									"key": "offset",
+									"value": "<number>",
+									"description": "The number of authors to skip in range [0,100]"
+								},
+								{
+									"key": "number",
+									"value": "<number>",
+									"description": "The number of authors to return in range [1,100]"
+								}
+							]
+						},
+						"description": " Search for book authors by name or partial name. The response contains the author's name and their id. You can then use the id in the book search. "
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/search-authors?name=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-authors"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": "The (partial/beginning) name of the author."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of authors to skip in range [0,100]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of authors to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-authors?name=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-authors"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": "The (partial/beginning) name of the author."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of authors to skip in range [0,100]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of authors to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Payment Required",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-authors?name=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-authors"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": "The (partial/beginning) name of the author."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of authors to skip in range [0,100]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of authors to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Payment Required",
+							"code": 402,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-authors?name=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-authors"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": "The (partial/beginning) name of the author."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of authors to skip in range [0,100]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of authors to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-authors?name=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-authors"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": "The (partial/beginning) name of the author."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of authors to skip in range [0,100]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of authors to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too Many Requests",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search-authors?name=<string>&offset=<number>&number=<number>&api-key=<API Key>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search-authors"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": "The (partial/beginning) name of the author."
+										},
+										{
+											"key": "offset",
+											"value": "<number>",
+											"description": "The number of authors to skip in range [0,100]"
+										},
+										{
+											"key": "number",
+											"value": "<number>",
+											"description": "The number of authors to return in range [1,100]"
+										},
+										{
+											"key": "api-key",
+											"value": "<API Key>",
+											"description": "Added as a part of security scheme: apikey"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "api-key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.bigbookapi.com"
+		}
+	]
+}
