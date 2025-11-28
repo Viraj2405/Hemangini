@@ -1,0 +1,139 @@
+name: Run Security Scan
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REPO_URL: "https://${{ secrets.API_SC_TOKEN }}@"
+  BRANCH: ''
+  FILE_NAME: ''
+  TEMP_DIR: 'temp-repo'
+  SECURITY_SCAN_API: 'https://github.com/v1/startSecurityScan'
+  PROJECT_ID: ''
+  BLOCK_PIPELINE: 'false'
+  BLOCK_CRITICAL: 'true'
+  BLOCK_HIGH: 'true'
+  BLOCK_MEDIUM: 'true'
+  CRITICAL_THRESHOLD: 0
+  HIGH_THRESHOLD: 0
+  MEDIUM_THRESHOLD: 0
+  APPKEYTOKEN: '3cadeb4b-3e68-48c7-ad45-8c48fc519b6a'
+  UPLOAD_API_URL: 'https://github.com/v1/webHook'
+  REPORT_API: 'https://github.com/v1/integrationPdf'
+
+jobs:
+  run-security-scan:
+    runs-on: windows-latest
+    steps:
+
+      - name: Clone Repository and Upload File
+        shell: pwsh
+        run: |
+          if (-not $env:REPO_URL -or -not $env:BRANCH -or -not $env:FILE_NAME) {
+            Write-Host "Skipping clone step: REPO_URL, BRANCH, or FILE_NAME not provided."
+            exit 0
+          }
+
+          git clone --branch $env:BRANCH --depth 1 $env:REPO_URL $env:TEMP_DIR
+          $filePath = Get-ChildItem -Path $env:TEMP_DIR -Recurse -File -Filter $env:FILE_NAME | Select-Object -First 1
+          if ($filePath) {
+            Write-Host "Found file: $($filePath.FullName)"
+            Copy-Item -Path $filePath.FullName -Destination "$env:FILE_NAME"
+            curl.exe --location --form "file=@$env:FILE_NAME" --form "project_id=$env:PROJECT_ID" $env:UPLOAD_API_URL
+          } else {
+            throw "File '$env:FILE_NAME' not found in repository."
+          }
+
+      - name: Run Security Scan
+        shell: pwsh
+        run: |
+          Write-Host "Calling Security Scan API..."
+          $apiUrl = "$env:SECURITY_SCAN_API/$env:PROJECT_ID"
+          $response = curl.exe --silent --request POST --header "Api-Key: $env:APPKEYTOKEN" --header "Content-Type: application/json" --header "Content-Length: 0" $apiUrl
+          if (-not $response) {
+            throw "No response received from API."
+          }
+
+          Write-Host "Scan Response: $response"
+
+          if ($response -match '"message"\s*:\s*"token expired"') {
+            throw "Token expired. Exiting early."
+          }
+
+          function Extract-Int {
+            param([string]$key)
+            $pattern = '"{0}"\s*:\s*(\d+)' -f $key
+            $match = [regex]::Match($response, $pattern)
+            if ($match.Success) {
+              return [int]$match.Groups[1].Value
+            } else {
+              return 0
+            }
+          }
+
+          $critical = Extract-Int "criticalCount"
+          $high     = Extract-Int "highCount"
+          $medium   = Extract-Int "mediumCount"
+
+          Write-Host "Scan Summary:"
+          Write-Host "Critical: $critical"
+          Write-Host "High: $high"
+          Write-Host "Medium: $medium"
+
+          # Export variables to GITHUB_ENV so next steps can see them
+          "CRITICAL_COUNT=$critical" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "HIGH_COUNT=$high" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "MEDIUM_COUNT=$medium" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+          if ($env:BLOCK_PIPELINE -eq 'true') {
+            if ($env:BLOCK_CRITICAL -eq 'true' -and $critical -gt [int]$env:CRITICAL_THRESHOLD) {
+              throw "Blocked due to critical vulnerabilities exceeding threshold."
+            }
+            if ($env:BLOCK_HIGH -eq 'true' -and $high -gt [int]$env:HIGH_THRESHOLD) {
+              throw "Blocked due to high vulnerabilities exceeding threshold."
+            }
+            if ($env:BLOCK_MEDIUM -eq 'true' -and $medium -gt [int]$env:MEDIUM_THRESHOLD) {
+              throw "Blocked due to medium vulnerabilities exceeding threshold."
+            }
+            Write-Host "No blocking conditions met. Continuing pipeline."
+          } else {
+            Write-Host "Blocking disabled. Continuing regardless of findings."
+          }
+
+      - name: Generate Vulnerability PDF Report
+        # Run even if previous step failed (blocked), but only if we have counts
+        if: (success() || failure()) 
+        shell: pwsh
+        run: |
+          # Check if we have counts (meaning scan ran successfully before blocking)
+          if (-not $env:CRITICAL_COUNT) { 
+             Write-Host "No scan data available. Skipping PDF generation."
+             exit 0 
+          }
+
+          if ([int]$env:CRITICAL_COUNT -gt 0 -or [int]$env:HIGH_COUNT -gt 0 -or [int]$env:MEDIUM_COUNT -gt 0) {
+             Write-Host "Generating PDF Report..."
+             # Create JSON payload correctly escaping quotes for PowerShell/Windows
+             $payload = '{"project_id": "' + $env:PROJECT_ID + '"}'
+             
+             curl.exe --location --request POST $env:REPORT_API --header "Content-Type: application/json" --header "Api-Key: $env:APPKEYTOKEN" --data $payload --output VulnerabilityReport.pdf
+             
+             Write-Host "PDF report generated: VulnerabilityReport.pdf"
+          } else {
+             Write-Host "No vulnerabilities found. Skipping PDF generation."
+          }
+
+      - name: Upload Vulnerability Report
+        # Run even if previous steps failed, but only if the file exists
+        if: (success() || failure())
+        uses: actions/upload-artifact@v4
+        with:
+          name: VulnerabilityReport
+          path: VulnerabilityReport.pdf
+          if-no-files-found: ignore
+
+      - name: Post-processing
+        if: success() 
+        run: echo "Post-processing steps completed."
