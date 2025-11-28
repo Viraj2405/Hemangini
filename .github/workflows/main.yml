@@ -11,7 +11,7 @@ env:
   FILE_NAME: ''
   TEMP_DIR: 'temp-repo'
   SECURITY_SCAN_API: 'https://github.com/v1/startSecurityScan'
-  PROJECT_ID: ''
+  PROJECT_ID: '39fa3ec6-59ec-4be0-b7af-cd7a5a09ab8b'
   BLOCK_PIPELINE: 'false'
   BLOCK_CRITICAL: 'true'
   BLOCK_HIGH: 'true'
